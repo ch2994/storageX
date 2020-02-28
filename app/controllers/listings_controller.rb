@@ -1,12 +1,11 @@
 class ListingsController < ApplicationController
 
   def index
-    debugger
-    zipcode = params[:listing].zipcode
-    if zipcode.nil?
+    listing = params[:listing]
+    if listing.nil?
       @all_listings = Listing.all
     else
-      @all_listings = Listing.where(:zipcode == zipcode)
+      @all_listings = Listing.where(:zipcode == listing.zipcode)
     end
   end
 
