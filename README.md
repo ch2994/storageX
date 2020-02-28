@@ -8,6 +8,6 @@
 1.  User stories for the basic features of your product
 2.  Working prototype that passes the user stories when running cucumber
 3.  Heroku deployment link
-4.  Code (github URI)
+4.  Code (github URI) for public
 5.  Any additional materials you would like to submit
 
