@@ -1,10 +1,8 @@
-
-
 Given(/^I am on the home page$/) do
   pending
 end
 
-Given(/^I am in the "([^"]*)"$/) do |arg|
+Then(/^I should see some "([^"]*)" listings$/) do |arg|
   pending
 end
 
