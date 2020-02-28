@@ -3,7 +3,7 @@
 
 = form_tag listings_path, :method => :get, id: "zipcode filter" do
   = label :listing, :zipcode, 'Zip Code'
-  = text_field :zipcode, 'zipcode'
+  = text_field :listing, 'zipcode'
 
   = submit_tag 'Filter', :class => 'btn btn-primary'
 
