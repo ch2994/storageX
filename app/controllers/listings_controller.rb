@@ -6,19 +6,28 @@ class ListingsController < ApplicationController
   end
 
   def index
-    debugger
-    zipcode = params[:listing].zipcode
-    if zipcode.nil?
+    listing = params[:listing]
+    if listing.nil?
       @all_listings = Listing.all
     else
-      @all_listings = Listing.where(:zipcode == zipcode)
+      @all_listings = Listing.where(:zipcode == listing.zipcode)
     end
   end
 
+  def show
+    id = params[:id] # retrieve movie ID from URI route
+    @listing = Listing.find(id) # look up movie by unique ID
+    # will render app/views/movies/show.<extension> by default
+  end
+
   def create
-    @listing = Listing.create!(listing_params)
-    #flash[:notice] = "#{@listings.storage} was successfully created."
-    redirect_to listing_path
+    @listing = Listing.new(listing_params)
+    if @listing.save
+      flash[:notice] = 'New listing added successfully!'
+      redirect_to action: "index"
+    else
+      render 'new'
+    end
   end
 
 end
