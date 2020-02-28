@@ -1,7 +1,7 @@
 # storageX
 ### Team
 1.  Cheng Huang (ch2994)
-2.  Yinmei Niu (nm3150)
+2.  Niuyin Mei (nm3150)
 3.  Zhihao Zhang (zz2692)
 
 ### Iteration One Deliberable:
