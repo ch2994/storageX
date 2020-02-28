@@ -6,7 +6,8 @@ class ListingsController < ApplicationController
   end
 
   def index
-    zipcode = params[:zipcode]
+    debugger
+    zipcode = params[:listing].zipcode
     if zipcode.nil?
       @all_listings = Listing.all
     else
