@@ -1,0 +1,1 @@
+Feature: show the list of all available storage
