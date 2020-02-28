@@ -34,11 +34,12 @@ gem "haml-rails", "~> 1.0.0"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 #
-gem 'cucumber-rails', group: :test
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
 end
 
 group :development do
