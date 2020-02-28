@@ -5,7 +5,7 @@ class ListingsController < ApplicationController
     if listing.nil?
       @all_listings = Listing.all
     else
-      @all_listings = Listing.where(:zipcode == listing.zipcode)
+      @all_listings = Listing.where(zipcode:listing[:zipcode])
     end
   end
 

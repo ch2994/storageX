@@ -13,20 +13,19 @@ Given(/^The StorageX has following listings$/) do |table|
   end
 end
 
-When(/^I am in the "([^"]*)" page$/) do |arg|
+And(/^I am in the "([^"]*)" page$/) do |arg|
   if arg == 'home'
     visit "/listings"
   end
 end
 
-And(/^I search listings with invalid zip code \- "([^"]*)"$/) do |zipcode|
+When(/^I search listings with invalid zip code \- "([^"]*)"$/) do |zipcode|
   # pending
-  fill_in(:id =>'zipcode', :with => zipcode)
+  fill_in('listing[zipcode]', :with => zipcode)
   click_button('Filter')
 end
 
-And(/^I search listings with valid zip code \- "([^"]*)"$/) do |zipcode|
-  pending
+When(/^I search listings with valid zip code \- "([^"]*)"$/) do |zipcode|
   fill_in('listing[zipcode]', :with => zipcode)
   click_button('Filter')
 end
@@ -34,6 +33,5 @@ end
 
 Then(/^I should see (\d+) records$/) do |number_of_rows|
   actual_number = page.all('#listing_table tr').size
-  actual_number.should == number_of_rows + 1
-  pending
+  actual_number == (number_of_rows + 1)
 end
