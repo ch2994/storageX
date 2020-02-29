@@ -6,14 +6,17 @@
   = text_field :listing, 'zipcode'
   = submit_tag 'Filter'
 
-%table{id:'listing_table'}
+%table#listings.table.table-striped.col-md-12{id:'listing_table'}
   %thead
     %tr
-      %th Storage ID
-      %th Address
-      %th Zip Code
-      %th Daily Price
-      %th E-mail
+      - Listing::col_names.keys.each do |col|
+        - if col == flash[:sorted_col]
+          %th.hilite= Listing::col_names[col]
+        - elsif Listing::valid_sort_cols.include?col
+          %th= link_to Listing::col_names[col], listings_path(:sorted_col => col)
+        - else
+          %th= Listing::col_names[col]
+      %th More Info
   %tbody
     - @all_listings.each do |listing|
       %tr
@@ -22,3 +25,4 @@
         %td= listing.zipcode
         %td= listing.daily_price
         %td= listing.email
+        %td= 'To be done'

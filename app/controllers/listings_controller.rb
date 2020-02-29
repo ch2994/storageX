@@ -1,12 +1,11 @@
 class ListingsController < ApplicationController
 
   def index
-    listing = params[:listing]
-    if listing.nil?
-      @all_listings = Listing.all
-    else
-      @all_listings = Listing.where(zipcode:listing[:zipcode])
-    end
+    conditions = params[:listing].nil??session[:conditions]:params[:listing]
+    sorted_col = params[:sorted_col].nil??session[:sorted_col]:params[:sorted_col]
+    @all_listings = Listing.user_filter(conditions, sorted_col)
+    session[:sorted_col] = sorted_col
+    session[:conditions] = conditions
   end
 
 end
