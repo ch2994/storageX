@@ -7,11 +7,11 @@ class ListingsController < ApplicationController
 
   def index
     listing = params[:listing]
-    if listing.nil?
-      @all_listings = Listing.all
-    else
-      @all_listings = Listing.where(:zipcode == listing.zipcode)
-    end
+    @all_listings = if listing.nil?
+                      Listing.all
+                    else
+                      Listing.where(:zipcode == listing.zipcode)
+                    end
   end
 
   def show
@@ -22,12 +22,12 @@ class ListingsController < ApplicationController
 
   def create
     @listing = Listing.new(listing_params)
-    if @listing.save
-      flash[:notice] = 'New listing added successfully!'
-      redirect_to action: "index"
-    else
-      render 'new'
-    end
+    flash[:notice] = if @listing.save
+                       'New listing added successfully!'
+                     else
+                       'Failed to Add New listing'
+                     end
+    redirect_to action: "index"
   end
 
 end
