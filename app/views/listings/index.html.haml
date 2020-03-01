@@ -15,11 +15,10 @@
       %th Address
       %th Zip Code
       %th Daily Price
-      %th E-mail
   %tbody
     - @all_listings.each do |listing|
       %tr
         %td= listing.address
         %td= listing.zipcode
         %td= listing.daily_price
-        %td= listing.email
+        %td= link_to "More Details", listing_url(listing)
