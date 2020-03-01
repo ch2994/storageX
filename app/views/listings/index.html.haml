@@ -12,7 +12,6 @@
 %table#listings.table.table-striped.col-md-12
   %thead
     %tr
-      %th Storage ID
       %th Address
       %th Zip Code
       %th Daily Price
@@ -20,7 +19,6 @@
   %tbody
     - @all_listings.each do |listing|
       %tr
-        %td= listing.storage_id
         %td= listing.address
         %td= listing.zipcode
         %td= listing.daily_price
