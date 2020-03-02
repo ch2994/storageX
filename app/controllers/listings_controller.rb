@@ -2,9 +2,7 @@ require 'SecureRandom'
 
 class ListingsController < ApplicationController
   def listing_params
-    params.require(:listing).permit(:name, :address, :city,
-                                    :state, :zipcode, :daily_price,
-                                    :size)
+    params.require(:listing).permit(Listing::sym2name.keys)
   end
 
   def index
