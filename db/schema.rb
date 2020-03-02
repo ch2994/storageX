@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200228150811) do
+ActiveRecord::Schema.define(version: 20200302011955) do
 
   create_table "listings", force: :cascade do |t|
     t.string "storage_id"
@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 20200228150811) do
     t.string "email"
   end
 
-  create_table "userlistings", force: :cascade do |t|
-    t.string "userid"
+  create_table "users", force: :cascade do |t|
     t.string "username"
+    t.string "userid"
     t.string "password"
   end
 
