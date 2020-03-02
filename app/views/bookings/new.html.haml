@@ -1,5 +1,11 @@
-%h1 New booking
+%h1 Finish Booking for #{@listing.name}
+= form_tag bookings_path do
+  = label :booking, 'Start Date'
+  = date_select :booking, :start_date
 
-= render 'form'
+  = label :booking, 'End Date'
+  = date_select :booking, :end_date
+
+  = submit_tag 'Confirm Booking', :class => 'btn btn-primary'
 
 = link_to 'Back', bookings_path

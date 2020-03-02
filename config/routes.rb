@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   get 'listings/index' => 'listings#index'
 
+  post 'bookings/new' => 'bookings#new'
+
   # Example resource route with options:
   #   resources :products do
   #     member do

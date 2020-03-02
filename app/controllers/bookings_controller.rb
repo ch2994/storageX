@@ -14,7 +14,8 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
-    @booking = Booking.new
+    listing_id = params[:listing_id]
+    @listing = Listing.find(listing_id)
   end
 
   # GET /bookings/1/edit
@@ -24,12 +25,13 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
+    puts params
     @booking = Booking.new(booking_params)
 
     respond_to do |format|
       if @booking.save
-        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
-        format.json { render :show, status: :created, location: @booking }
+        format.html { redirect_to @booking, notice: 'Booking was successfully created.'}
+        format.json { render :index, status: :created, location: @booking }
       else
         format.html { render :new }
         format.json { render json: @booking.errors, status: :unprocessable_entity }

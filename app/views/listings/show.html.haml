@@ -18,8 +18,9 @@
 %li
   Price:
   = @listing.daily_price
+-# - debugger
 
-= button_to 'Book', n(@movie), :class => 'btn btn-primary'
+= button_to 'Book', new_booking_path(:listing_id => @listing), :class => 'btn btn-primary', :method => 'post'
 
 
 -#%h4 Description:
