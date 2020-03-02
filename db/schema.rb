@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200228150811) do
+ActiveRecord::Schema.define(version: 20200302013111) do
 
   create_table "listings", force: :cascade do |t|
-    t.string "storage_id"
-    t.string "address"
-    t.string "zipcode"
-    t.string "daily_price"
-    t.string "email"
+    t.string   "address"
+    t.string   "zipcode"
+    t.string   "daily_price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.string   "city"
+    t.string   "state"
   end
 
 end
