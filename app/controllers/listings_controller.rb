@@ -2,7 +2,9 @@ require 'SecureRandom'
 
 class ListingsController < ApplicationController
   def listing_params
-    params.require(:listing).permit(:address, :zipcode, :daily_price, :email)
+    params.require(:listing).permit(:name, :address, :city,
+                                    :state, :zipcode, :daily_price,
+                                    :size)
   end
 
   def index
@@ -21,8 +23,9 @@ class ListingsController < ApplicationController
 
   def create
     @listing = Listing.new(listing_params)
-    @listing.storage_id = SecureRandom.hex
-
+    time_now = Time.now.getutc
+    @listing.created_at = time_now
+    @listing.updated_at = time_now
     flash[:notice] = if @listing.save
                        'New listing added successfully!'
                      else

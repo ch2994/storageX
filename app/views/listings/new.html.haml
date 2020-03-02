@@ -1,8 +1,17 @@
 %h2 Create New Listing
 
 = form_tag listings_path do
+  = label :listing, 'Name'
+  = text_field :listing, :name
+
   = label :listing, 'Address'
   = text_field :listing, :address
+
+  = label :listing, 'City'
+  = text_field :listing, :city
+
+  = label :listing, 'State'
+  = text_field :listing, :state
 
   = label :listing, 'Zip Code'
   = text_field :listing, :zipcode
@@ -10,7 +19,7 @@
   = label :listing, 'Daily Price'
   = text_field :listing, :daily_price
 
-  = label :listing, 'Email'
-  = text_field :listing, :email
+  = label :listing, 'Size (Cubic Meter)'
+  = text_field :listing, :size
 
   = submit_tag 'Save Changes', :class => 'btn btn-primary'
