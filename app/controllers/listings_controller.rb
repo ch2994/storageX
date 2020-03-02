@@ -1,4 +1,9 @@
+require 'SecureRandom'
+
 class ListingsController < ApplicationController
+  def listing_params
+    params.require(:listing).permit(:address, :zipcode, :daily_price, :email)
+  end
 
   def index
     conditions = params[:listing].nil??session[:conditions]:params[:listing]
@@ -6,6 +11,24 @@ class ListingsController < ApplicationController
     @all_listings = Listing.user_filter(conditions, sorted_col)
     session[:sorted_col] = sorted_col
     session[:conditions] = conditions
+  end
+
+  def show
+    id = params[:id] # retrieve movie ID from URI route
+    @listing = Listing.find(id) # look up movie by unique ID
+    # will render app/views/movies/show.<extension> by default
+  end
+
+  def create
+    @listing = Listing.new(listing_params)
+    @listing.storage_id = SecureRandom.hex
+
+    flash[:notice] = if @listing.save
+                       'New listing added successfully!'
+                     else
+                       'Failed to Add New listing'
+                     end
+    redirect_to action: "index"
   end
 
 end
