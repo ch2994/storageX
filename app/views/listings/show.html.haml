@@ -1,14 +1,20 @@
 
 -# in app/views/listings/show.html.haml
-%h3 Details about :  #{@listing.address}
+%h3 Details about :  #{@listing.name}
 
 %ul#details
 %li
   Location:
   = @listing.address
-%li
-  Zip Code:
+  =', '
+  = @listing.city
+  =', '
+  = @listing.state
+  =', '
   = @listing.zipcode
+%li
+  Size:
+  = @listing.size
 %li
   Price:
   = @listing.daily_price
