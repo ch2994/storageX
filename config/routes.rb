@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   resources :customers
+  resources :sessions, only: [:new, :create, :destroy]
+  get 'signup', to: 'customers#new', as: 'signup'
+  get 'login', to: 'sessions#new', as: 'login'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+
+  resources :customers
 
   resources :bookings
   # The priority is based upon order of creation: first created -> highest priority.
