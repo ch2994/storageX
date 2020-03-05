@@ -2,7 +2,9 @@ require 'SecureRandom'
 
 class ListingsController < ApplicationController
   def listing_params
-    params.require(:listing).permit(Listing::sym2name.keys)
+    params_new = params.require(:listing).permit(Listing::sym2name.keys)
+    params_new[:customer_id] = session['customer_id']
+    params_new
   end
 
   def index
