@@ -2,11 +2,17 @@ require 'SecureRandom'
 
 class ListingsController < ApplicationController
   def listing_params
-    params.require(:listing).permit(Listing::sym2name.keys)
+    params_new = params.require(:listing).permit(Listing::sym2name.keys)
+    params_new[:customer_id] = session['customer_id']
+    params_new
   end
 
   def index
-    conditions = params[:listing].nil??session[:conditions]:params[:listing]
+    if params[:condition].nil?
+      conditions = session[:conditions] = Listing.standardize_conditions(session[:conditions])
+    else
+      conditions = Listing.standardize_conditions(params[:condition])
+    end
     sorted_col = params[:sorted_col].nil??session[:sorted_col]:params[:sorted_col]
     @all_listings = Listing.user_filter(conditions, sorted_col)
     session[:sorted_col] = sorted_col

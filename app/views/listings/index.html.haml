@@ -2,8 +2,8 @@
 %h2 Filtered Available Listings
 
 = form_tag listings_path, :method => :get, id: "zipcode filter" do
-  = label :listing, :zipcode, 'Zip Code'
-  = text_field :listing, 'zipcode'
+  = label :condition, :zipcode, 'Zip Code'
+  = text_field :condition, 'zipcode'
   = submit_tag 'Filter'
 
 = link_to 'Add New Listing', new_listing_path
