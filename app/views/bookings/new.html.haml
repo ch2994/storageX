@@ -5,8 +5,8 @@
 
   = label :booking, 'End Date'
   = date_select :booking, :end_date
-
-  = hidden_field_tag :listing_id, value= @listing.listing_id
+  - debugger
+  = hidden_field_tag :listing_id, value= @listing
 
   = submit_tag 'Confirm Booking', :class => 'btn btn-primary'
 
