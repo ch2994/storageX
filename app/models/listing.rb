@@ -1,4 +1,6 @@
 class Listing < ActiveRecord::Base
+  belong_to :customer
+
   @valid_sort_cols = [:zipcode, :daily_price]
 
   @index_display_cols = [:name,:zipcode,:daily_price,:size]
