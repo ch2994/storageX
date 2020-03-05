@@ -15,7 +15,6 @@ class ListingsController < ApplicationController
     end
     sorted_col = params[:sorted_col].nil??session[:sorted_col]:params[:sorted_col]
     @all_listings = Listing.user_filter(conditions, sorted_col)
-    debugger
     session[:sorted_col] = sorted_col
     session[:conditions] = conditions
   end
