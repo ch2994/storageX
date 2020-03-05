@@ -11,13 +11,7 @@
       %div.container
         %div.navbar.navbar-expand-lg.bg-primary.text-white
           %h1.title StorageX : Affordable Storage Nearby
-          = form_tag new_customer_path, :method => :put, id: "login" do
-            = label :customer, :username, "Username"
-            = text_field :customer, :username
-            = label :customer, :password, "Password"
-            = password_field :customer, :password
-            = submit_tag 'Sign in'
-            = link_to 'or Sign up', new_customer_path
+          = link_to 'Sign in/Sign up', new_customer_path
         #main
           - if flash[:notice]
             %div.alert.alert-danger
