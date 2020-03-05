@@ -6,12 +6,19 @@
     = stylesheet_link_tag 'application', 'media' => 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-
     %body
       %div.container
         %div.navbar.navbar-expand-lg.bg-primary.text-white
           %h1.title StorageX : Affordable Storage Nearby
-          = link_to 'Sign in/Sign up', new_customer_path
+
+          - if current_customer
+            Logged in as #{current_customer.email}.
+            \#{link_to 'Log Out', logout_path}
+          - else
+            = link_to 'Sign Up', signup_path
+            or
+            \#{link_to 'Log In', login_path}
+
         #main
           - if flash[:notice]
             %div.alert.alert-danger
