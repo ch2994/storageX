@@ -8,16 +8,29 @@
     = csrf_meta_tags
     %body
       %div.container
-        %div.navbar.navbar-expand-lg.bg-primary.text-white
-          %h1.title StorageX : Affordable Storage Nearby
+        %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+          %a.navbar-brand StorageX : Affordable Storage Nearby
+          %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNav", "data-toggle" => "collapse", :type => "button"}
+            %span.navbar-toggler-icon
+          #navbarNav.collapse.navbar-collapse
+            %ul.navbar-nav
+              %li.nav-item.active
+                %a.nav-link{:href => root_path}
+                  Home
+                  %span.sr-only (current)
 
-          - if current_customer
-            Logged in as #{current_customer.email}.
-            \#{link_to 'Log Out', logout_path}
-          - else
-            = link_to 'Sign Up ', signup_path
-            or
-            \#{link_to ' Log In', login_path}
+          .navbarNav.collapse.navbar-collapse
+            %ul.navbar-nav.ml-auto
+              %li.nav-item
+                - if current_customer
+                  %a.nav-link.disabled Welcome #{current_customer.first_name}
+                - else
+                  %a.nav-link{:href => signup_path} sign up
+              %li.nav-item
+                - if current_customer
+                  %a.nav-link{:href => logout_path} log out
+                - else
+                  %a.nav-link{:href => login_path} log in
 
         #main
           - if flash[:notice]
