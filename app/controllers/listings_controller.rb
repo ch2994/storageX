@@ -8,9 +8,14 @@ class ListingsController < ApplicationController
   end
 
   def index
-    conditions = params[:listing].nil??session[:conditions]:params[:listing]
+    if params[:condition].nil?
+      conditions = session[:conditions] = Listing.standardize_conditions(session[:conditions])
+    else
+      conditions = Listing.standardize_conditions(params[:condition])
+    end
     sorted_col = params[:sorted_col].nil??session[:sorted_col]:params[:sorted_col]
     @all_listings = Listing.user_filter(conditions, sorted_col)
+    debugger
     session[:sorted_col] = sorted_col
     session[:conditions] = conditions
   end
