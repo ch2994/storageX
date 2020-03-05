@@ -1,7 +1,6 @@
 class Listing < ActiveRecord::Base
   @valid_sort_cols = [:zipcode, :daily_price]
 
-
   @index_display_cols = [:name,:zipcode,:daily_price,:size]
 
   @sym2name = {:name => 'Name',
