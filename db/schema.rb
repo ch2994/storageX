@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200302030806) do
+ActiveRecord::Schema.define(version: 20200305161350) do
 
   create_table "bookings", force: :cascade do |t|
     t.datetime "start_date"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20200302030806) do
   end
 
   add_index "bookings", ["listing_id"], name: "index_bookings_on_listing_id"
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "first_name", null: false
+    t.string   "last_name",  null: false
+    t.string   "email",      null: false
+    t.string   "phone",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "username",   null: false
+    t.string   "password",   null: false
+  end
 
   create_table "listings", force: :cascade do |t|
     t.string   "address",     null: false
