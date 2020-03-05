@@ -36,4 +36,10 @@ ActiveRecord::Schema.define(version: 20200302030806) do
     t.string   "size",        null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "userid"
+    t.string "password"
+  end
+
 end
