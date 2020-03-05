@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :customers
+  resources :customers, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
   get 'signup', to: 'customers#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'

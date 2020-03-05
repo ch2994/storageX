@@ -1,10 +1,9 @@
 %h1 Listing customers
 
-%table
+%table#customers.table.table-striped.col-md-12{id:'customers_table'}
   %thead
     %tr
       %th Username
-      %th Password
       %th First name
       %th Last name
       %th Email
@@ -17,14 +16,13 @@
     - @customers.each do |customer|
       %tr
         %td= customer.username
-        %td= customer.password
         %td= customer.first_name
         %td= customer.last_name
         %td= customer.email
         %td= customer.phone
         %td= link_to 'Show', customer
         %td= link_to 'Edit', edit_customer_path(customer)
-        %td= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Delete', customer, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
