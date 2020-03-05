@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
   # GET /bookings
   # GET /bookings.json
   def index
-    @bookings = Booking.all
+    @bookings = Booking.where(:customer_id => session['customer_id'])
   end
 
   # GET /bookings/1
@@ -71,6 +71,9 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:start_date, :end_date, :user, :listing_id)
+      params_new = params.require(:booking).permit(:start_date, :end_date)
+      params_new[:listing_id] = params[:listing_id]
+      params_new[:customer_id] = session[:customer_id]
+      params_new
     end
 end
