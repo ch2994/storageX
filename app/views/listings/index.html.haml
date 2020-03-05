@@ -1,13 +1,6 @@
 -#  This file is app/views/listings/index.html.haml
 %h2 Filtered Available Listings
 
-= form_tag 'customers/index', :method => :put, id: "login" do
-  = label :customer, :username, "Username"
-  = text_field :customer, :username
-  = label :customer, :password, "Password"
-  = password_field :user, :password
-  = submit_tag 'Sign in'
-
 = form_tag listings_path, :method => :get, id: "zipcode filter" do
   = label :listing, :zipcode, 'Zip Code'
   = text_field :listing, 'zipcode'
