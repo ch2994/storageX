@@ -1,0 +1,22 @@
+= form_for @booking do |f|
+  - if @booking.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@booking.errors.count, "error")} prohibited this booking from being saved:"
+      %ul
+        - @booking.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :start_date
+    = f.datetime_select :start_date
+  .field
+    = f.label :end_date
+    = f.datetime_select :end_date
+  .field
+    = f.label :user
+    = f.text_field :user
+  .field
+    = f.label :listing
+    = f.text_field :listing
+  .actions
+    = f.submit 'Save'

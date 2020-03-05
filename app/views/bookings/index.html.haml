@@ -1,0 +1,27 @@
+%h1 Listing bookings
+
+%table
+  %thead
+    %tr
+      %th Start date
+      %th End date
+      %th User
+      %th Listing
+      %th
+      %th
+      %th
+
+  %tbody
+    - @bookings.each do |booking|
+      %tr
+        %td= booking.start_date
+        %td= booking.end_date
+        %td= booking.user
+        %td= booking.listing
+        %td= link_to 'Show', booking
+        %td= link_to 'Edit', edit_booking_path(booking)
+        %td= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Booking', new_booking_path

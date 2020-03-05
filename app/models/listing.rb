@@ -1,19 +1,20 @@
 class Listing < ActiveRecord::Base
-  @valid_sort_cols = [:storage_id, :zipcode, :daily_price]
+  @valid_sort_cols = [:zipcode, :daily_price]
 
-  @col_names = {:storage_id=> 'Storage ID',
-                :address=> 'Address',
-                :zipcode=> 'Zip Code',
-                :daily_price=> 'Daily Price',
-                :email=> 'E-mail'}
 
-  @index_display_cols = {:address=> 'Address',
-                         :zipcode=> 'Zip Code',
-                         :daily_price=> 'Daily Price'}
+  @index_display_cols = [:name,:zipcode,:daily_price,:size]
+
+  @sym2name = {:name => 'Name',
+               :zipcode => 'Zip Code',
+               :daily_price => 'Daily Price',
+               :address => 'Address',
+               :city => 'City',
+               :state => 'State',
+               :size => 'Size (Cubic Meter)'}
 
   class << self
     attr_reader :valid_sort_cols
-    attr_reader :col_names
+    attr_reader :sym2name
     attr_reader :index_display_cols
   end
 
