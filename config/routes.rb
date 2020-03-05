@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bookings
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -17,6 +18,8 @@ Rails.application.routes.draw do
 
 
   get 'listings/index' => 'listings#index'
+
+  post 'bookings/new' => 'bookings#new'
 
   # Example resource route with options:
   #   resources :products do

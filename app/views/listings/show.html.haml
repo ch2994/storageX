@@ -1,0 +1,32 @@
+
+-# in app/views/listings/show.html.haml
+%h3 Details about :  #{@listing.name}
+
+%ul#details
+%li
+  Location:
+  = @listing.address
+  =', '
+  = @listing.city
+  =', '
+  = @listing.state
+  =', '
+  = @listing.zipcode
+%li
+  Size:
+  = @listing.size
+%li
+  Price:
+  = @listing.daily_price
+-# - debugger
+
+= button_to 'Book', new_booking_path(:listing_id => @listing), :class => 'btn btn-primary', :method => 'post'
+
+
+-#%h4 Description:
+-#
+-#%p#description= @movie.description
+-#
+-#= link_to 'Edit', edit_movie_path(@movie)
+-#= button_to 'Delete', movie_path(@movie), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-primary'
+-#= link_to 'Back to movie list', movies_path

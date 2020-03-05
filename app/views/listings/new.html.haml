@@ -1,0 +1,7 @@
+%h2 Create New Listing
+
+= form_tag listings_path do
+  - Listing::sym2name.keys.each do |col|
+    = label :listing, Listing::sym2name[col]
+    = text_field :listing, col
+  = submit_tag 'Save Changes', :class => 'btn btn-primary'
