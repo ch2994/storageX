@@ -1,0 +1,29 @@
+%h1 Listing customers
+
+%table#customers.table.table-striped.col-md-12{id:'customers_table'}
+  %thead
+    %tr
+      %th Username
+      %th First name
+      %th Last name
+      %th Email
+      %th Phone
+      %th
+      %th
+      %th
+
+  %tbody
+    - @customers.each do |customer|
+      %tr
+        %td= customer.username
+        %td= customer.first_name
+        %td= customer.last_name
+        %td= customer.email
+        %td= customer.phone
+        %td= link_to 'Show', customer
+        %td= link_to 'Edit', edit_customer_path(customer)
+        %td= link_to 'Delete', customer, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Customer', new_customer_path
