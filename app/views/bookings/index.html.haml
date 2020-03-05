@@ -1,6 +1,6 @@
 %h1 Listing bookings
 
-%table
+%table#bookings.table.table-striped.col-md-12{id:'bookings_table'}
   %thead
     %tr
       %th Start date
@@ -20,7 +20,7 @@
         %td= booking.listing
         %td= link_to 'Show', booking
         %td= link_to 'Edit', edit_booking_path(booking)
-        %td= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Delete', booking, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
