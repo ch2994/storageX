@@ -58,17 +58,20 @@ end
 
 
 When(/^I am on the "([^"]*)" page$/) do |arg|
-  if arg == "sign up"
+  if arg == 'sign up'
     click_link('sign up')
+  elsif arg == 'log in'
+    visit '/login'
   end
 end
 
 And(/^I create a valid account$/) do
+  visit '/signup'
   fill_in 'Username', with: 'ChengTest123'
-  fill_in 'Password', with: '213'
+  fill_in 'Password', with: '123'
   fill_in 'First name', with: 'Cheng'
   fill_in 'Last name', with: 'Huang'
-  fill_in 'Email', with: '123@gmail.com'
+  fill_in 'Email', with: 'huangchengmars@gmail.com'
   fill_in 'Phone', with: '7173398709'
   click_button 'Save'
 end
@@ -76,7 +79,7 @@ end
 And(/^I create two customer accounts$/) do
   click_link('sign up')
   fill_in 'Username', with: 'ChengTest123'
-  fill_in 'Password', with: '213'
+  fill_in 'Password', with: '123'
   fill_in 'First name', with: 'Cheng'
   fill_in 'Last name', with: 'Huang'
   fill_in 'Email', with: '123@gmail.com'
@@ -91,4 +94,24 @@ And(/^I create two customer accounts$/) do
   fill_in 'Email', with: '123@gmail.com'
   fill_in 'Phone', with: '7173398709'
   click_button 'Save'
+end
+
+
+Given(/^StorageX has the following customers$/) do |table|
+  # table is a table.hashes.keys # => [:username, :password_digest, :first_name, :last_name, :email, :phone, :created_at, :updated_at]
+  table.rows().each do |listing|
+    Customer.create(table.hashes)
+  end
+end
+
+And(/^I enter the correct credential$/) do
+  fill_in 'Email', with: 'huangchengmars@gmail.com'
+  fill_in 'Password', with: '123'
+  click_button 'Login'
+end
+
+And(/^I enter the incorrect credential$/) do
+  fill_in 'Email', with: 'invalid_email'
+  fill_in 'Password', with: 'invalid_passcode'
+  click_button 'Login'
 end
