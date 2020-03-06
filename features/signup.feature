@@ -1,8 +1,8 @@
 Feature: sign up
 
   As a customer
-  when I enter the correct credentials
-  I want to be able to login
+  when I enter the correct information
+  I want to be able to create an account
 
 Scenario: access the signup page
 
@@ -17,5 +17,13 @@ Scenario: create a new customer
   When I am on the "sign up" page
   And I create a valid account
   Then I should see "Customer was successfully created."
+
+Scenario: create a duplicate customer
+
+  Given I am in the "listing index" page
+  When I am on the "sign up" page
+  And I create two customer accounts
+  Then I should see "Email has already been taken"
+
 
 

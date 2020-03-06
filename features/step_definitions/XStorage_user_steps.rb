@@ -73,3 +73,22 @@ And(/^I create a valid account$/) do
   click_button 'Save'
 end
 
+And(/^I create two customer accounts$/) do
+  click_link('sign up')
+  fill_in 'Username', with: 'ChengTest123'
+  fill_in 'Password', with: '213'
+  fill_in 'First name', with: 'Cheng'
+  fill_in 'Last name', with: 'Huang'
+  fill_in 'Email', with: '123@gmail.com'
+  fill_in 'Phone', with: '7173398709'
+  click_button 'Save'
+
+  click_link('sign up')
+  fill_in 'Username', with: 'ChengTest123'
+  fill_in 'Password', with: '213'
+  fill_in 'First name', with: 'Cheng'
+  fill_in 'Last name', with: 'Huang'
+  fill_in 'Email', with: '123@gmail.com'
+  fill_in 'Phone', with: '7173398709'
+  click_button 'Save'
+end
