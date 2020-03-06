@@ -26,7 +26,6 @@ class BookingsController < ApplicationController
   # POST /bookings.json
   def create
     # puts params
-    debugger
     @booking = Booking.new(booking_params)
 
     respond_to do |format|
