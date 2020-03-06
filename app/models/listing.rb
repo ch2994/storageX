@@ -34,7 +34,7 @@ class Listing < ActiveRecord::Base
       return self.all
     elsif conditions.nil? or conditions.empty?
       return self.order(sorted_col.to_sym)
-    elsif (sorted_col.nil? or not @valid_sort_cols.include?sorted_col)
+    elsif (sorted_col.nil? or not @valid_sort_cols.include?sorted_col.to_sym)
       return self.where(:zipcode => conditions["zipcode"])
     else
       return self.where(:zipcode => conditions["zipcode"]).order(sorted_col)
