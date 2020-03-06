@@ -1,4 +1,4 @@
-require 'SecureRandom'
+require 'securerandom'
 
 class ListingsController < ApplicationController
   def listing_params

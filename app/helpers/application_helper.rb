@@ -1,4 +1,4 @@
-require 'SecureRandom'
+require 'securerandom'
 
 module ApplicationHelper
   def generate_listing_id
