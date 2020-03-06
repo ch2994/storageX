@@ -16,7 +16,7 @@ Scenario: create a new customer
   Given I am in the "listing index" page
   When I am on the "sign up" page
   And I create a valid account
-  Then I should see "Customer was successfully created."
+  Then I should see "log out"
 
 Scenario: create a duplicate customer
 

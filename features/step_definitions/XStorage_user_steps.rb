@@ -78,7 +78,7 @@ And(/^I create a valid account$/) do
 end
 
 And(/^I create two customer accounts$/) do
-  click_link('sign up')
+  visit '/signup'
   fill_in 'Username', with: 'ChengTest123'
   fill_in 'Password', with: '123'
   fill_in 'First name', with: 'Cheng'
@@ -87,7 +87,7 @@ And(/^I create two customer accounts$/) do
   fill_in 'Phone', with: '7173398709'
   click_button 'Save'
 
-  click_link('sign up')
+  visit '/signup'
   fill_in 'Username', with: 'ChengTest123'
   fill_in 'Password', with: '213'
   fill_in 'First name', with: 'Cheng'
