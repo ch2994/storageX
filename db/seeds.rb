@@ -13,17 +13,17 @@
 # #             {:storage_id => 'sx103', :address => '10 Hanover Sq', :zipcode => '10005', :daily_price => 40, :email => 'hij@columbia.edu'}
 # # ]
 
-listings = [{:name => 'Andy', :zipcode => '10023', :daily_price => 20, :address => '240 Park Ave S',
+listings = [{:name => 'Manhattan Mini Storage', :zipcode => '10023', :daily_price => 20, :address => '240 Park Ave S',
              :city => 'abc@columbia.edu', :state => 'New York', :size => 30},
-            {:name => 'Bob', :zipcode => '10023', :daily_price => 10, :address => '242 Park Ave S',
+            {:name => 'Brooklyn Max Storage', :zipcode => '10023', :daily_price => 10, :address => '242 Park Ave S',
              :city => 'New York', :state => 'New York', :size => 40},
-            {:name => 'Jack', :zipcode => '10023', :daily_price => 40, :address => '244 Park Ave S',
+            {:name => 'Jacks Storage', :zipcode => '10023', :daily_price => 40, :address => '244 Park Ave S',
              :city => 'New York', :state => 'New York', :size => 50},
-            {:name => 'Peter', :zipcode => '10024', :daily_price => 40, :address => '244 Park2 Ave S',
+            {:name => 'Columbia Storage', :zipcode => '10024', :daily_price => 40, :address => '244 Park2 Ave S',
              :city => 'New York', :state => 'New York', :size => 60},
-            {:name => 'Eric', :zipcode => '10024', :daily_price => 50, :address => '244 Park12 Ave S',
+            {:name => 'Store Eric', :zipcode => '10024', :daily_price => 50, :address => '244 Park12 Ave S',
              :city => 'New York', :state => 'New York', :size => 70},
-            {:name => 'John', :zipcode => '10025', :daily_price => 20, :address => '244 Park123 Ave S',
+            {:name => 'Leave your box', :zipcode => '10025', :daily_price => 20, :address => '244 Park123 Ave S',
              :city => 'New York', :state => 'New York', :size => 80}
 ]
 
