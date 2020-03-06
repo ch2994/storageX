@@ -10,7 +10,7 @@ Given(/^The StorageX has following listings$/) do |table|
   end
 end
 
-And(/^I am in the "([^"]*)" page$/) do |arg|
+Given(/^I am in the "([^"]*)" page$/) do |arg|
   if arg == 'listing index'
     visit "/listings"
   end
@@ -18,12 +18,12 @@ end
 
 When(/^I search listings with invalid zip code \- "([^"]*)"$/) do |zipcode|
   # pending
-  fill_in('listing[zipcode]', :with => zipcode)
+  fill_in('condition[zipcode]', :with => zipcode)
   click_button('Filter')
 end
 
 When(/^I search listings with valid zip code \- "([^"]*)"$/) do |zipcode|
-  fill_in('listing[zipcode]', :with => zipcode)
+  fill_in('condition[zipcode]', :with => zipcode)
   click_button('Filter')
 end
 
