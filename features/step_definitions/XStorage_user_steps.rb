@@ -9,13 +9,13 @@ Given(/^The StorageX has following listings$/) do |table|
   end
 end
 
-And(/^I am in the "([^"]*)" page$/) do |arg|
+Given(/^I am in the "([^"]*)" page$/) do |arg|
   if arg == 'listing index'
     visit "/listings"
   end
 end
 
-When(/^I search listings with invalid zip code \- "([^"]*)"$/) do |zipcode|
+Given(/^I search listings with invalid zip code \- "([^"]*)"$/) do |zipcode|
   # pending
   fill_in('listing[zipcode]', :with => zipcode)
   click_button('Filter')
@@ -43,3 +43,33 @@ end
 Then(/^I need to see the listings indexed by "([^"]*)"$/) do |col|
   pending
 end
+
+When("I press {string} link") do |string|
+  click_link('sign up')
+end
+
+Then("I should see {string}") do |string|
+  if page.respond_to? :should
+    page.should have_content(string)
+  else
+    assert page.has_content? string
+  end
+end
+
+
+When(/^I am on the "([^"]*)" page$/) do |arg|
+  if arg == "sign up"
+    click_link('sign up')
+  end
+end
+
+And(/^I create a valid account$/) do
+  fill_in 'Username', with: 'ChengTest123'
+  fill_in 'Password', with: '213'
+  fill_in 'First name', with: 'Cheng'
+  fill_in 'Last name', with: 'Huang'
+  fill_in 'Email', with: '123@gmail.com'
+  fill_in 'Phone', with: '7173398709'
+  click_button 'Save'
+end
+
