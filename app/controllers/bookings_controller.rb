@@ -26,15 +26,17 @@ class BookingsController < ApplicationController
   # POST /bookings.json
   def create
     # puts params
-    debugger
-    @booking = Booking.new(booking_params)
 
+    @booking = Booking.new(booking_params)
     respond_to do |format|
-      if @booking.save
+      if Booking.time_checking(@booking) and @booking.save
+        debugger
+        # if @booking.save
         format.html { redirect_to @booking, notice: 'Booking was successfully created.'}
         format.json { render :index, status: :created, location: @booking }
       else
-        format.html { render :new }
+        # @listing_id = @booking.listing_id
+        format.html { redirect_to  bookings_new_path(:listing_id => @booking.listing_id)}
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
     end
@@ -43,8 +45,9 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1
   # PATCH/PUT /bookings/1.json
   def update
+    @temp = Booking.new(booking_params)
     respond_to do |format|
-      if @booking.update(booking_params)
+      if Booking.time_checking(@temp) and @booking.update(booking_params)
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
