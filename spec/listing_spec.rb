@@ -10,6 +10,7 @@ describe Listing do
                   {:name => 'Jack', :zipcode => '10023', :daily_price => 40, :address => '244 Park Ave S',
                    :city => 'New York', :state => 'New York', :size => 50},
       ]
+      debugger
       listings.each do |listing|
         Listing.create!(listing)
       end

@@ -39,8 +39,10 @@ class BookingsController < ApplicationController
         format.json { render :index, status: :created, location: @booking }
       else
         # @listing_id = @booking.listing_id
+        debugger
         format.html { redirect_to  bookings_new_path(:listing_id => @booking.listing_id)}
         format.json { render json: @booking.errors, status: :unprocessable_entity }
+        flash[:notice] = "The date is invalid or is booked."
       end
     end
   end
