@@ -9,7 +9,7 @@ group :development do
 end
 
 group :production do
-  gem 'pg'         #gem to use in production environment
+  gem 'pg', '~> 0.18'         #gem to use in production environment
 end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
