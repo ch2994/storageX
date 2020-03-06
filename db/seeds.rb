@@ -12,19 +12,22 @@
 # #             {:storage_id => 'sx102', :address => '240 Park Ave S', :zipcode => '10003', :daily_price => 30, :email => 'def@columbia.edu'},
 # #             {:storage_id => 'sx103', :address => '10 Hanover Sq', :zipcode => '10005', :daily_price => 40, :email => 'hij@columbia.edu'}
 # # ]
+customer = [{:username => 'niuynmei', :password_digest => '123', :first_name => 'Niuyin', :last_name => 'Mei',
+             :email => 'jeff.mei@outlook.com', :phone => '365-187-1798', :created_at => '2020-02-02',
+             :updated_at => '2020-03-02'}]
 
 listings = [{:name => 'Manhattan Mini Storage', :zipcode => '10023', :daily_price => 20, :address => '240 Park Ave S',
-             :city => 'abc@columbia.edu', :state => 'New York', :size => 30},
+             :city => 'abc@columbia.edu', :state => 'New York', :size => 30, :customer_id => 1},
             {:name => 'Brooklyn Max Storage', :zipcode => '10023', :daily_price => 10, :address => '242 Park Ave S',
-             :city => 'New York', :state => 'New York', :size => 40},
+             :city => 'New York', :state => 'New York', :size => 40, :customer_id => 1},
             {:name => 'Jacks Storage', :zipcode => '10023', :daily_price => 40, :address => '244 Park Ave S',
-             :city => 'New York', :state => 'New York', :size => 50},
+             :city => 'New York', :state => 'New York', :size => 50, :customer_id => 1},
             {:name => 'Columbia Storage', :zipcode => '10024', :daily_price => 40, :address => '244 Park2 Ave S',
-             :city => 'New York', :state => 'New York', :size => 60},
+             :city => 'New York', :state => 'New York', :size => 60, :customer_id => 1},
             {:name => 'Store Eric', :zipcode => '10024', :daily_price => 50, :address => '244 Park12 Ave S',
-             :city => 'New York', :state => 'New York', :size => 70},
+             :city => 'New York', :state => 'New York', :size => 70, :customer_id => 1},
             {:name => 'Leave your box', :zipcode => '10025', :daily_price => 20, :address => '244 Park123 Ave S',
-             :city => 'New York', :state => 'New York', :size => 80}
+             :city => 'New York', :state => 'New York', :size => 80, :customer_id => 1}
 ]
 
 listings.each do |listing|
