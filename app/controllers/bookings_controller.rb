@@ -14,6 +14,10 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
+    if not session.keys.include?"customer_id"
+      flash[:notice] = "Please sign in before booking a listing, thanks."
+      redirect_to login_path
+    end
     listing_id = params[:listing_id]
     @listing = Listing.find(listing_id)
   end
