@@ -19,6 +19,7 @@
 .idea/*
 
 */.DS_store
+
 Gemfile.lock
 
 .byebug_history

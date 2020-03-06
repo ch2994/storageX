@@ -11,7 +11,7 @@ Scenario: filter by valid zip code
   | sx001      | 535 West 116TH ST      | 10025   | 30.5        | StorageX@columbia.edu   |
   | sx002      | 207 West 109TH ST      | 10025   | 20.5        | deo_zzh@qq.com          |
   | sx003      | 330 West 58TH ST       | 10019   | 25.5        | ch2994@columbia.edu     |
-  And I am in the "home" page
+  And I am in the "listing index" page
   When I search listings with valid zip code - "10025"
   Then I should see 2 records
 
@@ -23,6 +23,6 @@ Scenario: filter by invalid zip code
     | sx001      | 535 West 116TH ST      | 10025   | 30.5        | StorageX@columbia.edu   |
     | sx002      | 207 West 109TH ST      | 10025   | 20.5        | deo_zzh@qq.com          |
     | sx003      | 330 West 58TH ST       | 10019   | 25.5        | ch2994@columbia.edu     |
-  And I am in the "home" page
+  And I am in the "listing index" page
   When I search listings with invalid zip code - "10001"
   Then I should see 0 records

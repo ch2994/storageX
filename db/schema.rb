@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200305190755) do
+ActiveRecord::Schema.define(version: 20200306002413) do
 
   create_table "bookings", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"
-    t.string   "user"
     t.integer  "listing_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "customer_id"
   end
 
   add_index "bookings", ["listing_id"], name: "index_bookings_on_listing_id"
@@ -36,15 +36,16 @@ ActiveRecord::Schema.define(version: 20200305190755) do
   end
 
   create_table "listings", force: :cascade do |t|
-    t.string   "address",     null: false
-    t.string   "zipcode",     null: false
-    t.string   "daily_price", null: false
+    t.string   "address",                              null: false
+    t.string   "zipcode",                              null: false
+    t.decimal  "daily_price", precision: 15, scale: 2, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name",        null: false
-    t.string   "city",        null: false
-    t.string   "state",       null: false
-    t.string   "size",        null: false
+    t.string   "name",                                 null: false
+    t.string   "city",                                 null: false
+    t.string   "state",                                null: false
+    t.decimal  "size",        precision: 15, scale: 2, null: false
+    t.integer  "customer_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,7 +1,3 @@
-Given(/^I am on the home page$/) do
-  pending
-end
-
 Then(/^I should see some "([^"]*)" listings$/) do |arg|
   pending
 end
@@ -14,7 +10,7 @@ Given(/^The StorageX has following listings$/) do |table|
 end
 
 And(/^I am in the "([^"]*)" page$/) do |arg|
-  if arg == 'home'
+  if arg == 'listing index'
     visit "/listings"
   end
 end
@@ -34,4 +30,16 @@ end
 Then(/^I should see (\d+) records$/) do |number_of_rows|
   actual_number = page.all('#listing_table tr').size
   actual_number == (number_of_rows + 1)
+end
+
+When(/^I click the "([^"]*)" column$/) do |col|
+  if Listing::sym2name.include?col
+    click_link(Listing::sym2name[col.to_sym])
+  else
+    "Error: Listing Index page don't have the column that supports sorting."
+  end
+end
+
+Then(/^I need to see the listings indexed by "([^"]*)"$/) do |col|
+  pending
 end
