@@ -31,14 +31,16 @@ class BookingsController < ApplicationController
   def create
     # puts params
     @booking = Booking.new(booking_params)
-
     respond_to do |format|
-      if @booking.save
+      if Booking.validate(booking_params) and Booking.time_checking(@booking) and @booking.save
+        # if @booking.save
         format.html { redirect_to @booking, notice: 'Booking was successfully created.'}
         format.json { render :index, status: :created, location: @booking }
       else
-        format.html { render :new }
+        # @listing_id = @booking.listing_id
+        format.html { redirect_to  bookings_new_path(:listing_id => @booking.listing_id)}
         format.json { render json: @booking.errors, status: :unprocessable_entity }
+        flash[:notice] = "The date is invalid or is booked."
       end
     end
   end
@@ -46,8 +48,9 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1
   # PATCH/PUT /bookings/1.json
   def update
+    @temp = Booking.new(booking_params)
     respond_to do |format|
-      if @booking.update(booking_params)
+      if Booking.validate(booking_params) and Booking.time_checking(@temp) and @booking.update(booking_params)
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
