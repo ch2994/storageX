@@ -38,4 +38,11 @@ class ListingsController < ApplicationController
     redirect_to action: "index"
   end
 
+  def new
+    if not session.keys.include?"customer_id"
+      flash[:notice] = "Please sign in before posting a new listing, thanks."
+      redirect_to login_path
+    end
+  end
+
 end
