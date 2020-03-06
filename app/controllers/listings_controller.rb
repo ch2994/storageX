@@ -39,7 +39,7 @@ class ListingsController < ApplicationController
   end
 
   def new
-    if not session.keys.include?"customer_id" or not Customer.where(id: session[:customer_id]).empty?
+    if not session.keys.include?"customer_id" or Customer.where(id: session[:customer_id]).empty?
       flash[:notice] = "Please sign in before posting a new listing, thanks."
       redirect_to login_path
     end
