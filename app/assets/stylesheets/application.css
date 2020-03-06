@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+#navbar-primary .navbar-nav > li a:hover{
+    background:transparent !important;
+}
