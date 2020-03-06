@@ -6,11 +6,19 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create([{userid: '000001',username: 'nymei', password: '123456'} ])
+# User.create([{userid: '000001',username: 'nymei', password: '123456'} ])
+#
+# # listings = [{:storage_id => 'sx101', :address => '155 W 68th St', :zipcode => '10023', :daily_price => 20, :email => 'abc@columbia.edu'},
+# #             {:storage_id => 'sx102', :address => '240 Park Ave S', :zipcode => '10003', :daily_price => 30, :email => 'def@columbia.edu'},
+# #             {:storage_id => 'sx103', :address => '10 Hanover Sq', :zipcode => '10005', :daily_price => 40, :email => 'hij@columbia.edu'}
+# # ]
 
-listings = [{:storage_id => 'sx101', :address => '155 W 68th St', :zipcode => '10023', :daily_price => 20, :email => 'abc@columbia.edu'},
-            {:storage_id => 'sx102', :address => '240 Park Ave S', :zipcode => '10003', :daily_price => 30, :email => 'def@columbia.edu'},
-            {:storage_id => 'sx103', :address => '10 Hanover Sq', :zipcode => '10005', :daily_price => 40, :email => 'hij@columbia.edu'}
+listings = [{:name => 'Andy', :zipcode => '10023', :daily_price => 20, :address => '240 Park Ave S',
+             :city => 'abc@columbia.edu', :state => 'New York', :size => 30},
+            {:name => 'Bob', :zipcode => '10023', :daily_price => 10, :address => '242 Park Ave S',
+             :city => 'New York', :state => 'New York', :size => 40},
+            {:name => 'Jack', :zipcode => '10023', :daily_price => 40, :address => '244 Park Ave S',
+             :city => 'New York', :state => 'New York', :size => 50},
 ]
 
 listings.each do |listing|
