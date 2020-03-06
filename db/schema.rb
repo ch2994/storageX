@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200305225007) do
+ActiveRecord::Schema.define(version: 20200306002413) do
 
   create_table "bookings", force: :cascade do |t|
     t.datetime "start_date"
@@ -36,15 +36,15 @@ ActiveRecord::Schema.define(version: 20200305225007) do
   end
 
   create_table "listings", force: :cascade do |t|
-    t.string   "address",     null: false
-    t.string   "zipcode",     null: false
-    t.string   "daily_price", null: false
+    t.string   "address",                              null: false
+    t.string   "zipcode",                              null: false
+    t.decimal  "daily_price", precision: 15, scale: 2, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name",        null: false
-    t.string   "city",        null: false
-    t.string   "state",       null: false
-    t.string   "size",        null: false
+    t.string   "name",                                 null: false
+    t.string   "city",                                 null: false
+    t.string   "state",                                null: false
+    t.decimal  "size",        precision: 15, scale: 2, null: false
     t.integer  "customer_id"
   end
 

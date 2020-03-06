@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_customer
   def current_customer
-    if session[:customer_id]
+    if session[:customer_id] and not Customer.where(id: session[:customer_id]).empty?
       @current_customer ||= Customer.find(session[:customer_id])
     else
       @current_customer = nil

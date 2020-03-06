@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:customer_id] = nil
+    session.clear
     redirect_to root_url, notice: 'Logged out!'
   end
 end

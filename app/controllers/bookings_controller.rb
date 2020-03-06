@@ -14,6 +14,10 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
+    if not session.keys.include?"customer_id" or Customer.where(id: session[:customer_id]).empty?
+      flash[:notice] = "Please sign in before booking a listing, thanks."
+      redirect_to login_path
+    end
     listing_id = params[:listing_id]
     @listing = Listing.find(listing_id)
   end
@@ -26,7 +30,6 @@ class BookingsController < ApplicationController
   # POST /bookings.json
   def create
     # puts params
-
     @booking = Booking.new(booking_params)
     respond_to do |format|
       if Booking.time_checking(@booking) and @booking.save

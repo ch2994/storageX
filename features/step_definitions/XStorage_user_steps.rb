@@ -4,8 +4,9 @@ end
 
 Given(/^The StorageX has following listings$/) do |table|
   table.rows().each do |listing|
-  # table is a table.hashes.keys # => [:storage_id, :address, :zipcode, :daily_price, :email]
-    Listing.create(:storage_id => listing[0], :address => listing[1], :zipcode => listing[2], :daily_price => listing[3], :email => listing[4])
+    # table is a table.hashes.keys # => [:name, :address, :city, :state, :zipcode, :daily_price, :size, :customer_id, :created_at, :updated_at]
+    Listing.create(:name => listing[0], :address => listing[1], :city => listing[2], :state => listing[3], :zipcode => listing[4],
+                   :daily_price => listing[5], :size => listing[6], :customer_id => listing[7])
   end
 end
 

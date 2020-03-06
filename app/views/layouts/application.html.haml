@@ -2,22 +2,52 @@
 %html
   %head
     %link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous")
+    -#%link(rel= "stylesheet" type="text/css" href= "app/assets/stylesheets/application.css")
     %title StorageX : Affordable Storage Nearby
     = stylesheet_link_tag 'application', 'media' => 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
     %body
       %div.container
-        %div.navbar.navbar-expand-lg.bg-primary.text-white
-          %h1.title StorageX : Affordable Storage Nearby
+        %nav.navbar.navbar-expand-lg.navbar-light.bg-primary
+          %a.navbar-brand.mb-0.h1 StorageX : Affordable Storage Nearby
+          %button.navbar-toggler{'aria-controls' => 'navbarNav', 'aria-expanded' => false, 'aria-label' => 'Toggle navigation', 'data-target' => '#navbarNav', 'data-toggle' => 'collapse', :type => "button"}
+            %span.navbar-toggler-icon
+          #navbarNav.collapse.navbar-collapse
+            %ul.navbar-nav
+              %li.nav-item.active
+                %a.nav-link{:href => root_path}
+                  Home
+                  %span.sr-only (current)
 
-          - if current_customer
-            Logged in as #{current_customer.email}.
-            \#{link_to 'Log Out', logout_path}
-          - else
-            = link_to 'Sign Up ', signup_path
-            or
-            \#{link_to ' Log In', login_path}
+            %ul.navbar-nav.ml-auto
+              - if current_customer
+                %li.nav-item
+                  %a.navbar-text Welcome #{current_customer.first_name}
+                %li.nav-item
+                  %a.nav-link{:href => customer_path(current_customer)} My Profile
+                %li.nav-item
+                  %a.nav-link{:href => bookings_path(current_customer)} My Bookings
+                %li.nav-item
+                  %a.nav-link{:href => listings_path(current_customer)} My Listings
+                %li.nav-item
+                  %a.nav-link{:href => logout_path} log out
+              - else
+                %li.nav-item
+                  %a.nav-link{:href => signup_path} sign up
+                %li.nav-item
+                  %a.nav-link{:href => login_path} log in
+
+
+              -#%li.nav-item.dropdown
+              -#  %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => false, "href" => "#", "aria-haspopup" => true, "data-toggle" => "dropdown", :role => "button"}
+              -#    Dropdown link
+              -#  %ul.dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
+              -#    %a.dropdown-item{:href => "#"} Action
+              -#    %a.dropdown-item{:href => "#"} Another action
+              -#    %a.dropdown-item{:href => "#"} Something else here
+
+
 
         #main
           - if flash[:notice]
