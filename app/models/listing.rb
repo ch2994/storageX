@@ -20,6 +20,9 @@ class Listing < ActiveRecord::Base
   end
 
   def self.standardize_conditions(conditions)
+    if conditions.nil?
+      return
+    end
     conditions_new = {}
     conditions.keys.each do |con_key|
       if not conditions[con_key].nil? and not conditions[con_key].empty?
