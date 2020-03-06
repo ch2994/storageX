@@ -6,10 +6,14 @@ gem 'rails', '4.2.10'
 # Use sqlite3 as the database for Active Record
 group :development do
   gem 'sqlite3', '~> 1.3.6'    #gem to use in development environment
+  # gem 'pg', '= 0.15.0'
+  # gem 'postgresql'
+  #  gem 'sqlite3', '~> 1.3.6'    #gem to use in development environment
 end
 
 group :production do
-  gem 'pg', '~> 0.18'         #gem to use in production environment
+  gem 'pg', '= 0.15.0'
+  gem 'postgresql'         #gem to use in production environment
 end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

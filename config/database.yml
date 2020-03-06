@@ -21,5 +21,23 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  database: production
+  pool: 5
+  timeout: 5000
+
+# development:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: dev
+#   pool: 5
+#   username: advse
+#   password: columbiaadvse
+
+# test:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: test
+#   pool: 5
+#   username: advse
+#   password: columbiaadvse
