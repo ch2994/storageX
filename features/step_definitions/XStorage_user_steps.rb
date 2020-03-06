@@ -105,6 +105,7 @@ Given(/^StorageX has the following customers$/) do |table|
 end
 
 And(/^I enter the correct credential$/) do
+  visit '/login'
   fill_in 'Email', with: 'huangchengmars@gmail.com'
   fill_in 'Password', with: '123'
   click_button 'Login'
@@ -114,4 +115,38 @@ And(/^I enter the incorrect credential$/) do
   fill_in 'Email', with: 'invalid_email'
   fill_in 'Password', with: 'invalid_passcode'
   click_button 'Login'
+end
+
+When(/^I click the "([^"]*)" link$/) do |arg|
+  if arg == 'Add New Listing'
+    click_link('Add New Listing')
+  end
+end
+
+Given(/^I logged in already$/) do
+  visit '/signup'
+  fill_in 'Username', with: 'ChengTest123'
+  fill_in 'Password', with: '123'
+  fill_in 'First name', with: 'Cheng'
+  fill_in 'Last name', with: 'Huang'
+  fill_in 'Email', with: 'huangchengmars@gmail.com'
+  fill_in 'Phone', with: '7173398709'
+  click_button 'Save'
+
+  visit '/login'
+  fill_in 'Email', with: 'huangchengmars@gmail.com'
+  fill_in 'Password', with: '123'
+  click_button 'Login'
+end
+
+And(/^I create a valid listing$/) do
+  visit '/listings/new'
+  fill_in 'listing[name]', with: 'TestListing'
+  fill_in 'listing[zipcode]', with: '10019'
+  fill_in 'listing[daily_price]', with: '100'
+  fill_in 'listing[address]', with: 'TestAddress'
+  fill_in 'listing[city]', with: 'New York'
+  fill_in 'listing[state]', with: 'NY'
+  fill_in 'listing[size]', with: '200'
+  click_button 'Save Changes'
 end
