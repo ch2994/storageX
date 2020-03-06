@@ -19,9 +19,26 @@ listings = [{:name => 'Andy', :zipcode => '10023', :daily_price => 20, :address 
              :city => 'New York', :state => 'New York', :size => 40},
             {:name => 'Jack', :zipcode => '10023', :daily_price => 40, :address => '244 Park Ave S',
              :city => 'New York', :state => 'New York', :size => 50},
+            {:name => 'Peter', :zipcode => '10024', :daily_price => 40, :address => '244 Park2 Ave S',
+             :city => 'New York', :state => 'New York', :size => 60},
+            {:name => 'Eric', :zipcode => '10024', :daily_price => 50, :address => '244 Park12 Ave S',
+             :city => 'New York', :state => 'New York', :size => 70},
+            {:name => 'John', :zipcode => '10025', :daily_price => 20, :address => '244 Park123 Ave S',
+             :city => 'New York', :state => 'New York', :size => 80}
 ]
 
 listings.each do |listing|
   Listing.create!(listing)
+end
+
+bookings = [{:start_date => '2020-02-02', :end_date => '2020-02-04', :listing_id => 1, :created_at => '2020-02-02',
+             :updated_at => '2020-03-02', :customer_id=> 1},
+            {:start_date => '2020-02-02', :end_date => '2020-02-05', :listing_id => 2, :created_at => '2020-02-02',
+             :updated_at => '2020-03-02', :customer_id=> 1},
+            {:start_date => '2020-03-02', :end_date => '2020-02-06', :listing_id => 3, :created_at => '2020-02-02',
+             :updated_at => '2020-03-02', :customer_id=> 1}]
+
+bookings.each do |booking|
+  Booking.create!(booking)
 end
 
