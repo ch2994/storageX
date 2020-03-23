@@ -15,7 +15,8 @@
       %tr
         %td= booking.start_date
         %td= booking.end_date
-        %td= booking.listing.name
+        -#%td= Listing.find(booking.listing_id).name
+        -#%td= booking.listing.name
         %td= link_to 'Show', booking
         %td= link_to 'Edit', edit_booking_path(booking)
         %td= link_to 'Delete', booking, method: :delete, data: { confirm: 'Are you sure?' }
