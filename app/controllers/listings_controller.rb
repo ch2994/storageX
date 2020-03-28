@@ -2,7 +2,7 @@ require 'securerandom'
 
 class ListingsController < ApplicationController
   def listing_params
-    params_new = params.require(:listing).permit(Listing::sym2name.keys)
+    params_new = params.require(:listing).permit(Listing::sym2name.except(:images).keys, {images: []})
     params_new[:customer_id] = session['customer_id']
     params_new
   end
@@ -27,6 +27,7 @@ class ListingsController < ApplicationController
 
   def create
     @listing = Listing.new(listing_params)
+    debugger
     time_now = Time.now.getutc
     @listing.created_at = time_now
     @listing.updated_at = time_now
