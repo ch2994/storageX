@@ -18,7 +18,10 @@
 %li
   Price:
   = @listing.daily_price
--# - debugger
+
+%div
+  - @listing.images.each do |image|
+    = image_tag(image.url)
 
 = button_to 'Book', new_booking_path(:listing_id => @listing), :class => 'btn btn-primary', :method => 'post'
 
