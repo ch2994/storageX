@@ -1,0 +1,20 @@
+= form_for @listing do |f|
+  - if @listing.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@listing.errors.count, "error")} prohibited this booking from being saved:"
+      %ul
+        - @listing.errors.full_messages.each do |message|
+          %li= message
+
+  - Listing::sym2name.keys.each do |col|
+    - if col != :images
+      .field
+        = f.label :listing, Listing::sym2name[col]
+        = text_field :listing, col
+    - else
+      .field
+        = f.label :listing, Listing::sym2name[col]
+        = file_field :images, multiple: true
+
+  .actions
+    = f.submit 'Save'

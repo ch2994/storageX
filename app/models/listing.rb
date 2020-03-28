@@ -1,5 +1,6 @@
 class Listing < ActiveRecord::Base
   belongs_to :customer
+  mount_uploaders :images, ImagesUploader
 
   @valid_sort_cols = [:zipcode, :daily_price, :size]
 
@@ -11,7 +12,8 @@ class Listing < ActiveRecord::Base
                :address => 'Address',
                :city => 'City',
                :state => 'State',
-               :size => 'Size (Cubic Meter)'}
+               :size => 'Size (Cubic Meter)',
+               :images => 'Upload images'}
 
   class << self
     attr_reader :valid_sort_cols
