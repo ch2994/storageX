@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200328234612) do
+ActiveRecord::Schema.define(version: 20200329052749) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "bookings", force: :cascade do |t|
     t.datetime "start_date"
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 20200328234612) do
     t.integer  "customer_id"
   end
 
-  add_index "bookings", ["listing_id"], name: "index_bookings_on_listing_id"
+  add_index "bookings", ["listing_id"], name: "index_bookings_on_listing_id", using: :btree
 
   create_table "customers", force: :cascade do |t|
     t.string   "username"
@@ -36,17 +39,17 @@ ActiveRecord::Schema.define(version: 20200328234612) do
   end
 
   create_table "listings", force: :cascade do |t|
-    t.string   "address",                                                   null: false
-    t.string   "zipcode",                                                   null: false
-    t.decimal  "daily_price", precision: 15, scale: 2,                      null: false
+    t.string   "address",                              null: false
+    t.string   "zipcode",                              null: false
+    t.decimal  "daily_price", precision: 15, scale: 2, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name",                                                      null: false
-    t.string   "city",                                                      null: false
-    t.string   "state",                                                     null: false
-    t.decimal  "size",        precision: 15, scale: 2,                      null: false
+    t.string   "name",                                 null: false
+    t.string   "city",                                 null: false
+    t.string   "state",                                null: false
+    t.decimal  "size",        precision: 15, scale: 2, null: false
     t.integer  "customer_id"
-    t.string   "images",                               default: "--- []\n"
+    t.json     "images"
   end
 
   create_table "users", force: :cascade do |t|

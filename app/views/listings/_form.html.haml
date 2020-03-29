@@ -13,8 +13,7 @@
         = text_field :listing, col
     - else
       .field
-        = f.label :listing, Listing::sym2name[col]
-        = file_field :images, multiple: true
+        = f.file_field :images, multiple: true
 
   .actions
     = f.submit 'Save'

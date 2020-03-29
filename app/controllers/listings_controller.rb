@@ -22,12 +22,12 @@ class ListingsController < ApplicationController
   def show
     id = params[:id] # retrieve movie ID from URI route
     @listing = Listing.find(id) # look up movie by unique ID
+    debugger
     # will render app/views/movies/show.<extension> by default
   end
 
   def create
     @listing = Listing.new(listing_params)
-    debugger
     time_now = Time.now.getutc
     @listing.created_at = time_now
     @listing.updated_at = time_now
