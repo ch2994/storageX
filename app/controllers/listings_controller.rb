@@ -1,11 +1,12 @@
 require 'securerandom'
 
 class ListingsController < ApplicationController
-  def listing_params
-    params_new = params.require(:listing).permit(Listing::sym2name.keys)
-    params_new[:customer_id] = session['customer_id']
-    params_new
-  end
+  before_action :set_listing, only: [:show, :edit, :update, :destroy, :show_review]
+  # def listing_params
+  #   params_new = params.require(:listing).permit(Listing::sym2name.keys)
+  #   params_new[:customer_id] = session['customer_id']
+  #   params_new
+  # end
 
   def index
     if params[:condition].nil?
@@ -15,12 +16,13 @@ class ListingsController < ApplicationController
     end
     sorted_col = params[:sorted_col].nil??session[:sorted_col]:params[:sorted_col]
     @all_listings = Listing.user_filter(conditions, sorted_col)
-    # debugger
     session[:sorted_col] = sorted_col
     session[:conditions] = conditions
+    @listings = Listing.where(:customer_id => session['customer_id'])
   end
 
   def show
+    debugger
     id = params[:id] # retrieve movie ID from URI route
     @listing = Listing.find(id) # look up movie by unique ID
     # will render app/views/movies/show.<extension> by default
@@ -46,4 +48,43 @@ class ListingsController < ApplicationController
     end
   end
 
+  def edit
+    debugger
+    @listing = set_listing
+  end
+
+  def update
+    @temp = set_listing
+    listing_params[:updated_at] = DateTime.now
+    respond_to do |format|
+      if Listing.validate(listing_params) and @listing.update(listing_params)
+        debugger
+        format.html { redirect_to @listing, notice: 'Listing was successfully updated.' }
+        format.json { render :show, status: :ok, location: @listing }
+      else
+        format.html { render :edit }
+        format.json { render json: @listing.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+
+  end
+
+  def show_review
+    @current_review = Review.find_by_listing_id(params[:id])
+    debugger
+  end
+  private
+
+  def set_listing
+    @listing = Listing.find(params[:id])
+  end
+
+  def listing_params
+    params_new = params.require(:listing).permit(:name, :address, :zipcode, :city, :state, :daily_price, :size)
+    params_new[:id] = params[:id]
+    return params_new
+  end
 end

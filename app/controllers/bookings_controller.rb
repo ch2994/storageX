@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy, :show_review]
 
   # GET /bookings
   # GET /bookings.json
@@ -81,6 +81,10 @@ class BookingsController < ApplicationController
       format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def show_review
+
   end
 
   private
