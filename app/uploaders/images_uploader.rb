@@ -3,7 +3,11 @@ require 'SecureRandom'
 class ImagesUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
+
+  version :resized do
+    process :resize_to_fit => [500, 500]
+  end
 
   # Choose what kind of storage to use for this uploader:
   storage :fog
@@ -24,7 +28,7 @@ class ImagesUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  # process scale: [200, 300]
+  #process resize_to_limit: [3000, 3000]
   #
   # def scale(width, height)
   #   # do something
@@ -43,9 +47,9 @@ class ImagesUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  def filename
-    newFileName = SecureRandom.base64[0,8] + '.jpg'
-    debugger
-    newFileName
-  end
+  # def filename
+  #   newFileName = SecureRandom.base64[0,8] + '.jpg'
+  #   debugger
+  #   newFileName
+  # end
 end
