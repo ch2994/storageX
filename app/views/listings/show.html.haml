@@ -20,9 +20,10 @@
   = @listing.daily_price
 
 %div
+  %li Pictures:
   - @listing.images.each do |image|
     -if image
-      = image_tag image.url
+      = image_tag(image.url, size: "300x200")
 
 = button_to 'Book', new_booking_path(:listing_id => @listing), :class => 'btn btn-primary', :method => 'post'
 
