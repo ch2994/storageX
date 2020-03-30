@@ -12,9 +12,13 @@
 # #             {:storage_id => 'sx102', :address => '240 Park Ave S', :zipcode => '10003', :daily_price => 30, :email => 'def@columbia.edu'},
 # #             {:storage_id => 'sx103', :address => '10 Hanover Sq', :zipcode => '10005', :daily_price => 40, :email => 'hij@columbia.edu'}
 # # ]
-customer = [{:username => 'niuynmei', :password_digest => '123', :first_name => 'Niuyin', :last_name => 'Mei',
+customers = [{:username => 'niuynmei', :password_digest => '123', :first_name => 'Niuyin', :last_name => 'Mei',
              :email => 'jeff.mei@outlook.com', :phone => '365-187-1798', :created_at => '2020-02-02',
              :updated_at => '2020-03-02'}]
+
+customers.each do |customer|
+  Customer.create!(customer)
+end
 
 listings = [{:name => 'Manhattan Mini Storage', :zipcode => '10023', :daily_price => 20, :address => '240 Park Ave S',
              :city => 'abc@columbia.edu', :state => 'New York', :size => 30, :customer_id => 1},
