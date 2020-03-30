@@ -10,7 +10,7 @@ class BookingsController < ApplicationController
   # GET /bookings/1
   # GET /bookings/1.json
   def show
-    debugger
+
   end
 
   # GET /bookings/new
@@ -25,10 +25,8 @@ class BookingsController < ApplicationController
 
   # GET /bookings/1/edit
   def edit
-    debugger
     @booking = Booking.find(params[:id])
     @listing = Listing.find(@booking.listing_id)
-    debugger
   end
 
   # POST /bookings
@@ -62,7 +60,6 @@ class BookingsController < ApplicationController
                                       booking_params["end_date(3i)"].to_i)
     @temp[:updated_at] = DateTime.now
     respond_to do |format|
-      debugger
       if Booking.validate(booking_params) and Booking.time_checking(@temp) and @booking.update(booking_params)
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }

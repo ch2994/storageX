@@ -22,7 +22,6 @@ class ListingsController < ApplicationController
   end
 
   def show
-    debugger
     id = params[:id] # retrieve movie ID from URI route
     @listing = Listing.find(id) # look up movie by unique ID
     # will render app/views/movies/show.<extension> by default
@@ -49,7 +48,6 @@ class ListingsController < ApplicationController
   end
 
   def edit
-    debugger
     @listing = set_listing
   end
 
@@ -58,7 +56,6 @@ class ListingsController < ApplicationController
     listing_params[:updated_at] = DateTime.now
     respond_to do |format|
       if Listing.validate(listing_params) and @listing.update(listing_params)
-        debugger
         format.html { redirect_to @listing, notice: 'Listing was successfully updated.' }
         format.json { render :show, status: :ok, location: @listing }
       else
@@ -74,7 +71,6 @@ class ListingsController < ApplicationController
 
   def show_review
     @current_review = Review.find_by_listing_id(params[:id])
-    debugger
   end
   private
 
@@ -85,6 +81,7 @@ class ListingsController < ApplicationController
   def listing_params
     params_new = params.require(:listing).permit(:name, :address, :zipcode, :city, :state, :daily_price, :size)
     params_new[:id] = params[:id]
+    params_new[:customer_id] = session['customer_id']
     return params_new
   end
 end

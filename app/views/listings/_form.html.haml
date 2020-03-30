@@ -1,0 +1,39 @@
+= form_for @listing do |f|
+  - if @listing.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@listing.errors.count, "error")} prohibited this listing from being saved:"
+      %ul
+        - @listing.errors.full_messages.each do |message|
+          %li= message
+
+
+  .field
+    = f.label :name
+    = f.text_field :name
+
+  .field
+    = f.label :address
+    = f.text_field :address
+
+  .field
+    = f.label :zipcode
+    = f.text_field  :zipcode
+
+  .field
+    = f.label :city
+    = f.text_field :city
+
+  .field
+    = f.label :state
+    = f.text_field :state
+
+  .field
+    = f.label :daily_price
+    = f.number_field  :daily_price
+
+  .field
+    = f.label :size
+    = f.number_field  :size
+
+  .actions
+    = f.submit 'Save'

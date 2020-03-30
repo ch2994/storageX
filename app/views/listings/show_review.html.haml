@@ -1,0 +1,22 @@
+%h4 Reviews on #{@listing.name}
+%table#listings.table.table-striped.col-md-12{id:'listing_table'}
+  %thead
+    %th User
+    %th Rating
+    %th Comments
+  %tbody
+
+
+
+%h4 Your review is very important to us, Thank you!
+
+= form_tag review_path do
+  = label :review, 'Ratings'
+  = number_field :review, :rating,:in => 0..10, :step => 1
+  .span
+  = label :review, 'Comments'
+  .span
+  = text_area :review, :comments,
+  :rows => 10, :cols =>50, :placeholder => 'Enter text.'
+  .actions
+    =  link_to 'Write a Review', new_review_path
