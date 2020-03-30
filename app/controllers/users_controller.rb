@@ -17,7 +17,6 @@ class UsersController < ApplicationController
   def login_attempt
     username = params[:user]["username"]
     password = params[:user]['password']
-    # debugger
     current_user = User.find_by_username(username)
     if password == current_user.password
       redirect_to("/listings/index")

@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy, :show_review]
 
   # GET /bookings
   # GET /bookings.json
@@ -10,6 +10,7 @@ class BookingsController < ApplicationController
   # GET /bookings/1
   # GET /bookings/1.json
   def show
+
   end
 
   # GET /bookings/new
@@ -24,6 +25,8 @@ class BookingsController < ApplicationController
 
   # GET /bookings/1/edit
   def edit
+    @booking = Booking.find(params[:id])
+    @listing = Listing.find(@booking.listing_id)
   end
 
   # POST /bookings
@@ -48,7 +51,14 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1
   # PATCH/PUT /bookings/1.json
   def update
-    @temp = Booking.new(booking_params)
+    @temp = set_booking
+    @temp[:start_date] = DateTime.new(booking_params["start_date(1i)"].to_i,
+                                      booking_params["start_date(2i)"].to_i,
+                                      booking_params["start_date(3i)"].to_i)
+    @temp[:end_date] = DateTime.new(booking_params["end_date(1i)"].to_i,
+                                      booking_params["end_date(2i)"].to_i,
+                                      booking_params["end_date(3i)"].to_i)
+    @temp[:updated_at] = DateTime.now
     respond_to do |format|
       if Booking.validate(booking_params) and Booking.time_checking(@temp) and @booking.update(booking_params)
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
@@ -70,6 +80,10 @@ class BookingsController < ApplicationController
     end
   end
 
+  def show_review
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
@@ -80,6 +94,9 @@ class BookingsController < ApplicationController
     def booking_params
       params_new = params.require(:booking).permit(:start_date, :end_date)
       params_new[:listing_id] = params[:listing_id].to_i
+      if params_new[:listing_id] == 0
+          params_new[:listing_id] = Booking.find(params[:id]).listing_id
+      end
       params_new[:customer_id] = session[:customer_id]
       params_new
     end
