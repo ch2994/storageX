@@ -18,10 +18,12 @@
           %th= link_to Listing::sym2name[col], listings_path(:sorted_col => col)
         - else
           %th= Listing::sym2name[col]
-      %th More Info
+      %th{:colspan => 4} Options
   %tbody
     - @all_listings.each do |listing|
       %tr
         - Listing::index_display_cols.each do |col|
           %td= listing[col]
-        %td= link_to "More Details", listing_url(listing)
+        %td= link_to "More Details", listing
+        %td= link_to "Edit", edit_listing_path(listing)
+        %td= link_to "Reviews", show_review_listing_path(listing)

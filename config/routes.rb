@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'bookings/show_review'
+
+  get 'listings/show_review'
+
+  resources :reviews
   resources :customers, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
   get 'signup', to: 'customers#new', as: 'signup'
@@ -7,7 +12,11 @@ Rails.application.routes.draw do
 
   resources :customers
 
-  resources :bookings
+  resources :bookings do
+    member do
+      get :show_review
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -29,6 +38,8 @@ Rails.application.routes.draw do
 
   post 'bookings/new' => 'bookings#new'
 
+  post 'reviews/new' => 'reviews#new'
+
   # Example resource route with options:
   #   resources :products do
   #     member do
@@ -40,7 +51,15 @@ Rails.application.routes.draw do
   #       get 'sold'
   #     end
   #   end
-  resources :listings
+  # resources :listings do
+  #
+  # end
+  resources :listings do
+    member do
+      get :show_review
+    end
+  end
+
 
   get 'users/index'
 

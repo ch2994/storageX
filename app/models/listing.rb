@@ -44,4 +44,8 @@ class Listing < ActiveRecord::Base
     end
   end
 
+  def self.validate(listing_params)
+    return true
+  end
+
 end
