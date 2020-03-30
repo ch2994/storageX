@@ -2,11 +2,6 @@ require 'securerandom'
 
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy, :show_review]
-  # def listing_params
-  #   params_new = params.require(:listing).permit(Listing::sym2name.keys)
-  #   params_new[:customer_id] = session['customer_id']
-  #   params_new
-  # end
 
   def index
     if params[:condition].nil?
@@ -44,6 +39,8 @@ class ListingsController < ApplicationController
     if not session.keys.include?"customer_id" or Customer.where(id: session[:customer_id]).empty?
       flash[:notice] = "Please sign in before posting a new listing, thanks."
       redirect_to login_path
+    else
+      @listing = Listing.new
     end
   end
 
@@ -79,7 +76,7 @@ class ListingsController < ApplicationController
   end
 
   def listing_params
-    params_new = params.require(:listing).permit(:name, :address, :zipcode, :city, :state, :daily_price, :size)
+    params_new = params.require(:listing).permit(Listing::sym2name.except(:images).keys, {images: []})
     params_new[:id] = params[:id]
     params_new[:customer_id] = session['customer_id']
     return params_new
