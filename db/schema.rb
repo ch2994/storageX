@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200325024927) do
+
+ActiveRecord::Schema.define(version: 20200329052749) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "bookings", force: :cascade do |t|
     t.datetime "start_date"
@@ -22,7 +26,7 @@ ActiveRecord::Schema.define(version: 20200325024927) do
     t.integer  "customer_id"
   end
 
-  add_index "bookings", ["listing_id"], name: "index_bookings_on_listing_id"
+  add_index "bookings", ["listing_id"], name: "index_bookings_on_listing_id", using: :btree
 
   create_table "customers", force: :cascade do |t|
     t.string   "username"
@@ -46,6 +50,7 @@ ActiveRecord::Schema.define(version: 20200325024927) do
     t.string   "state",                                null: false
     t.decimal  "size",        precision: 15, scale: 2, null: false
     t.integer  "customer_id"
+    t.json     "images"
   end
 
   create_table "reviews", force: :cascade do |t|

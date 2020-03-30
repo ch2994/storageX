@@ -6,34 +6,15 @@
         - @listing.errors.full_messages.each do |message|
           %li= message
 
-
-  .field
-    = f.label :name
-    = f.text_field :name
-
-  .field
-    = f.label :address
-    = f.text_field :address
-
-  .field
-    = f.label :zipcode
-    = f.text_field  :zipcode
-
-  .field
-    = f.label :city
-    = f.text_field :city
-
-  .field
-    = f.label :state
-    = f.text_field :state
-
-  .field
-    = f.label :daily_price
-    = f.number_field  :daily_price
-
-  .field
-    = f.label :size
-    = f.number_field  :size
+  - Listing::sym2name.keys.each do |col|
+    - if col != :images
+      .field
+        = f.label :listing, Listing::sym2name[col]
+        = text_field :listing, col
+    - else
+      .field
+        Upload Photo
+        = f.file_field :images, multiple: true
 
   .actions
     = f.submit 'Save'
