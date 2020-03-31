@@ -6,12 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# User.create([{userid: '000001',username: 'nymei', password: '123456'} ])
-#
-# # listings = [{:storage_id => 'sx101', :address => '155 W 68th St', :zipcode => '10023', :daily_price => 20, :email => 'abc@columbia.edu'},
-# #             {:storage_id => 'sx102', :address => '240 Park Ave S', :zipcode => '10003', :daily_price => 30, :email => 'def@columbia.edu'},
-# #             {:storage_id => 'sx103', :address => '10 Hanover Sq', :zipcode => '10005', :daily_price => 40, :email => 'hij@columbia.edu'}
-# # ]
 customers = [{:username => 'niuynmei', :password_digest => '123', :first_name => 'Niuyin', :last_name => 'Mei',
              :email => 'jeff.mei@outlook.com', :phone => '365-187-1798', :created_at => '2020-02-02',
              :updated_at => '2020-03-02'}]
@@ -20,18 +14,18 @@ customers.each do |customer|
   Customer.create!(customer)
 end
 
-listings = [{:name => 'Manhattan Mini Storage', :zipcode => '10023', :daily_price => 20, :address => '240 Park Ave S',
-             :city => 'abc@columbia.edu', :state => 'New York', :size => 30, :customer_id => 1},
-            {:name => 'Brooklyn Max Storage', :zipcode => '10023', :daily_price => 10, :address => '242 Park Ave S',
-             :city => 'New York', :state => 'New York', :size => 40, :customer_id => 1},
-            {:name => 'Jacks Storage', :zipcode => '10023', :daily_price => 40, :address => '244 Park Ave S',
-             :city => 'New York', :state => 'New York', :size => 50, :customer_id => 1},
-            {:name => 'Columbia Storage', :zipcode => '10024', :daily_price => 40, :address => '244 Park2 Ave S',
-             :city => 'New York', :state => 'New York', :size => 60, :customer_id => 1},
-            {:name => 'Store Eric', :zipcode => '10024', :daily_price => 50, :address => '244 Park12 Ave S',
-             :city => 'New York', :state => 'New York', :size => 70, :customer_id => 1},
-            {:name => 'Leave your box', :zipcode => '10025', :daily_price => 20, :address => '244 Park123 Ave S',
-             :city => 'New York', :state => 'New York', :size => 80, :customer_id => 1}
+listings = [{:name => 'Manhattan Mini Storage', :zipcode => '10003', :daily_price => 20, :address => '240 Park Ave S',
+             :city => 'abc@columbia.edu', :state => 'New York', :size => 30, :lat => 40.73802, :lon => -73.98835, :customer_id => 1},
+            {:name => 'Brooklyn Max Storage', :zipcode => '11201', :daily_price => 10, :address => '34 Orange St, Brooklyn',
+             :city => 'New York', :state => 'New York', :size => 40, :lat => 40.6991, :lon => -73.99441, :customer_id => 1},
+            {:name => 'Jacks Storage', :zipcode => '10023', :daily_price => 40, :address => '132 West 71st Street',
+             :city => 'New York', :state => 'New York', :size => 50, :lat => 40.77701, :lon => -73.98061, :customer_id => 1},
+            {:name => 'Columbia Storage', :zipcode => '10025', :daily_price => 40, :address => '2955 Broadway',
+             :city => 'New York', :state => 'New York', :size => 60, :lat => 40.80793, :lon => -73.96444, :customer_id => 1},
+            {:name => 'Store Eric', :zipcode => '10024', :daily_price => 50, :address => '2233 Broadway',
+             :city => 'New York', :state => 'New York', :size => 70, :lat => 40.76456, :lon => -73.93039, :customer_id => 1},
+            {:name => 'Leave your box', :zipcode => '10025', :daily_price => 20, :address => '135 W 107TH ST',
+             :city => 'New York', :state => 'New York', :size => 80, :lat => 40.80065, :lon => -73.96423, :customer_id => 1}
 ]
 
 listings.each do |listing|
