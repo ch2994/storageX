@@ -48,7 +48,9 @@ class Listing < ActiveRecord::Base
   end
 
   def self.get_long_lat_by_address(specific_address)
-    geocodeUrlTemplate = 'https://atlas.microsoft.com/search/address/json?subscription-key={subscription-key}&api-version=1&query={query}&language={language}&countrySet={countrySet}&limit={numResults}&view=Auto'
+    geocodeUrlTemplate = 'https://atlas.microsoft.com/search/address/json?'\
+                         'subscription-key={subscription-key}&api-version=1&query={query}'\
+                         '&language={language}&countrySet={countrySet}&limit={numResults}&view=Auto'
 
     geo_http_request = geocodeUrlTemplate.gsub('{subscription-key}', URI::encode(@azure_map_key))
                        .gsub('{query}',URI::encode(specific_address))
@@ -65,15 +67,22 @@ class Listing < ActiveRecord::Base
   def self.user_filter(conditions=nil, sorted_col=nil, search_query=nil)
     if not search_query.nil?
       center_loc = get_long_lat_by_address(search_query)
+      search_conditions = "lat <= #{center_loc['lat']+0.1} "\
+                          "and lat >= #{center_loc['lat']-0.1} "\
+                          "and lon <= #{center_loc['lon']+0.1} "\
+                          "and lon >= #{center_loc['lon']-0.1}"
+      after_search_items = self.where(search_conditions)
+    else
+      after_search_items = self.all
     end
     if (conditions.nil? or conditions.empty?) and (sorted_col.nil? or !@valid_sort_cols.include?sorted_col.to_sym)
-      return self.all
+      return after_search_items.all
     elsif conditions.nil? or conditions.empty?
-      return self.order(sorted_col.to_sym)
+      return after_search_items.order(sorted_col.to_sym)
     elsif (sorted_col.nil? or not @valid_sort_cols.include?sorted_col.to_sym)
-      return self.where(:zipcode => conditions["zipcode"])
+      return after_search_items.where(:zipcode => conditions["zipcode"])
     else
-      return self.where(:zipcode => conditions["zipcode"]).order(sorted_col)
+      return after_search_items.where(:zipcode => conditions["zipcode"]).order(sorted_col)
     end
   end
 

@@ -16,6 +16,13 @@ function GetMap() {
         }
     });
 
+    debugger;
+    // Customize map center
+    if (gon.hasOwnProperty("map_center")){
+        customize_map_center = [gon.map_center.lon, gon.map_center.lat]
+        map.setCamera({center: customize_map_center})
+    }
+
     //Wait until the map resources are ready.
     map.events.add('ready', function () {
         //Create a data source to store the data in.

@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-customers = [{:username => 'niuynmei', :password_digest => '123', :first_name => 'Niuyin', :last_name => 'Mei',
+customers = [{:username => 'niuynmei', :password_digest => 'e1e6984d48ce6c0cd7473c487e6fe33d', :first_name => 'Niuyin', :last_name => 'Mei',
              :email => 'jeff.mei@outlook.com', :phone => '365-187-1798', :created_at => '2020-02-02',
              :updated_at => '2020-03-02'}]
 

@@ -13,7 +13,10 @@ class ListingsController < ApplicationController
     search_query = params['queryTbx']
     gon.azure_map_key = Listing.azure_map_key
     @all_listings = Listing.user_filter(conditions, sorted_col, search_query)
-    flash[:search_query] = search_query
+    if not search_query.nil?
+      gon.map_center = Listing.get_long_lat_by_address(search_query)
+      flash[:search_query] = search_query
+    end
     session[:sorted_col] = sorted_col
     session[:conditions] = conditions
 
