@@ -1,12 +1,33 @@
 -#  This file is app/views/listings/index.html.haml
-%h2 Filtered Available Listings
+
+= include_gon
+
+%body{ :onload => 'GetMap()' }
+
+= stylesheet_link_tag "https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"
+= javascript_include_tag "https://code.jquery.com/jquery-1.12.4.js"
+= javascript_include_tag "https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+= stylesheet_link_tag "https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css"
+= javascript_include_tag "https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"
+
+%h2 Search Your Ideal Listings
+.ui-widget
+  -# = label :queryTbx, :search_input , "Enter your search query:"
+  = form_tag listings_path, :method => :get, id: "Search_Form" do
+    - if flash[:search_query].nil?
+      = search_field_tag 'queryTbx', nil, :placeholder => "Search.."
+    - else
+      = search_field_tag 'queryTbx', flash[:search_query], :placeholder => "Search.."
+    = submit_tag 'Submit'
+
+%br
+
+= link_to 'Add New Listing', new_listing_path
 
 = form_tag listings_path, :method => :get, id: "zipcode filter" do
   = label :condition, :zipcode, 'Zip Code'
   = text_field :condition, 'zipcode'
   = submit_tag 'Filter'
-
-= link_to 'Add New Listing', new_listing_path
 
 %table#listings.table.table-striped.col-md-12{id:'listing_table'}
   %thead
@@ -27,3 +48,5 @@
         %td= link_to "More Details", listing
         %td= link_to "Edit", edit_listing_path(listing)
         %td= link_to "Reviews", show_review_listing_path(listing)
+
+%div{:id=>"myMap", :style=>"position:relative;width:100%;min-width:290px;height:500px;"}

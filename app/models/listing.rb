@@ -1,6 +1,18 @@
+require "http"
+require 'uri'
+require 'json'
+
 class Listing < ActiveRecord::Base
   belongs_to :customer
   mount_uploaders :images, ImagesUploader
+
+  # def initialize()
+  #   super.initialize()
+  #   @azure_map_key = Geo_function_initializer.new.azure_map_key
+  #   debugger
+  # end
+
+  @azure_map_key = Geo_function_initializer.new.azure_map_key
 
   @valid_sort_cols = [:zipcode, :daily_price, :size]
 
@@ -19,6 +31,7 @@ class Listing < ActiveRecord::Base
     attr_reader :valid_sort_cols
     attr_reader :sym2name
     attr_reader :index_display_cols
+    attr_reader :azure_map_key
   end
 
   def self.standardize_conditions(conditions)
@@ -34,7 +47,25 @@ class Listing < ActiveRecord::Base
     conditions_new
   end
 
-  def self.user_filter(conditions=nil, sorted_col=nil)
+  def self.get_long_lat_by_address(specific_address)
+    geocodeUrlTemplate = 'https://atlas.microsoft.com/search/address/json?subscription-key={subscription-key}&api-version=1&query={query}&language={language}&countrySet={countrySet}&limit={numResults}&view=Auto'
+
+    geo_http_request = geocodeUrlTemplate.gsub('{subscription-key}', URI::encode(@azure_map_key))
+                       .gsub('{query}',URI::encode(specific_address))
+                       .gsub('{language}','en-US')
+                       .gsub('{countrySet}','US')
+                       .gsub('{numResults}','1')
+
+    geo_http_response = JSON.parse(HTTP.get(geo_http_request).body)
+    location = geo_http_response['results'][0]['position']
+
+    return location
+  end
+
+  def self.user_filter(conditions=nil, sorted_col=nil, search_query=nil)
+    if not search_query.nil?
+      center_loc = get_long_lat_by_address(search_query)
+    end
     if (conditions.nil? or conditions.empty?) and (sorted_col.nil? or !@valid_sort_cols.include?sorted_col.to_sym)
       return self.all
     elsif conditions.nil? or conditions.empty?

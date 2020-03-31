@@ -10,9 +10,13 @@ class ListingsController < ApplicationController
       conditions = Listing.standardize_conditions(params[:condition])
     end
     sorted_col = params[:sorted_col].nil??session[:sorted_col]:params[:sorted_col]
-    @all_listings = Listing.user_filter(conditions, sorted_col)
+    search_query = params['queryTbx']
+    gon.azure_map_key = Listing.azure_map_key
+    @all_listings = Listing.user_filter(conditions, sorted_col, search_query)
+    flash[:search_query] = search_query
     session[:sorted_col] = sorted_col
     session[:conditions] = conditions
+
     @listings = Listing.where(:customer_id => session['customer_id'])
   end
 
