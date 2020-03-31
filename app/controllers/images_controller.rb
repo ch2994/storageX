@@ -29,7 +29,13 @@ class ImagesController < ApplicationController
     remain_images = @listing.images # copy the array
     deleted_image = remain_images.delete_at(index) # delete the target image
     deleted_image.try(:remove!) # delete image from S3
-    @listing.images = remain_images # re-assign back
+
+    if remain_images.empty?
+      @listing.remove_images!
+    else
+      @listing.images = remain_images # re-assign back
+    end
+
   end
 
   def images_params

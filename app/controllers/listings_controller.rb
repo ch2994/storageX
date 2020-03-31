@@ -51,7 +51,6 @@ class ListingsController < ApplicationController
   def update
     @temp = set_listing
     listing_params[:updated_at] = DateTime.now
-    debugger
     respond_to do |format|
       if Listing.validate(listing_params) and @listing.update(listing_params)
         format.html { redirect_to @listing, notice: 'Listing was successfully updated.' }

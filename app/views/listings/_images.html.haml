@@ -2,7 +2,7 @@
   - @listing.images.each_slice(3) do |image_column|
     .column
       - image_column.each_with_index do |image, index|
-        -if image
+        - if image
           = image_tag(image.url, size: "300x200")
           - if current_customer
             = link_to "Delete", listing_image_path(@listing, index), :method => :delete, data: { confirm: "Are you sure you want to delete this image?" }
