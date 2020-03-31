@@ -10,7 +10,7 @@
 = stylesheet_link_tag "https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css"
 = javascript_include_tag "https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"
 
-%h2 Search Your Ideal Listings
+%h5 Search Your Ideal Listings
 .ui-widget
   -# = label :queryTbx, :search_input , "Enter your search query:"
   = form_tag listings_path, :method => :get, id: "Search_Form" do
@@ -48,5 +48,5 @@
         %td= link_to "More Details", listing
         %td= link_to "Edit", edit_listing_path(listing)
         %td= link_to "Reviews", show_review_listing_path(listing)
-
-%div{:id=>"myMap", :style=>"position:relative;width:100%;min-width:290px;height:500px;"}
+%h5 Map Mode for Listings (To be released)
+%div{:id=>"MapDisplay", :style=>"position:relative;width:100%;min-width:290px;height:500px;"}

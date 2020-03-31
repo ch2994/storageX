@@ -6,9 +6,10 @@ var geocodeServiceUrlTemplate = 'https://atlas.microsoft.com/search/{searchType}
 
 function GetMap() {
     //Initialize a map instance.
-    map = new atlas.Map('myMap', {
+    map = new atlas.Map('MapDisplay', {
         view: 'Auto',
-
+        center: [-74.00723, 40.71305],
+        zoom: 12,
         authOptions: {
             authType: 'subscriptionKey',
             subscriptionKey: gon.azure_map_key
@@ -19,6 +20,7 @@ function GetMap() {
     map.events.add('ready', function () {
         //Create a data source to store the data in.
         datasource = new atlas.source.DataSource();
+
         map.sources.add(datasource);
 
         //Add a layer for rendering point data.
@@ -31,13 +33,15 @@ function GetMap() {
 
                 var countryIso = 'US';
 
+                var center = map.getCamera().center;
+
                 //Create a URL to the Azure Maps search service to perform the search.
                 var requestUrl = geocodeServiceUrlTemplate.replace('{query}', encodeURIComponent(request.term))
                     .replace('{searchType}', 'fuzzy')
                     .replace('{subscription-key}', atlas.getSubscriptionKey())
                     .replace('{language}', 'en-US')
-                    .replace('{lon}', 0)    //Use a lat and lon value of the center the map to bais the results to the current map view.
-                    .replace('{lat}', 0)
+                    .replace('{lon}', center[0])    //Use a lat and lon value of the center the map to bais the results to the current map view.
+                    .replace('{lat}', center[1])
                     .replace('{countrySet}', countryIso); //A comma seperated string of country codes to limit the suggestions to.
 
                 $.ajax({
