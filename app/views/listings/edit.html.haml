@@ -1,6 +1,19 @@
-%h1 Editing listing
+%h2 Edit Listing : Basic Info
 
-= render 'form'
+= render 'form', page: "edit"
+
+%h2 Edit Listing : Photos
+
+Current Photos:
+
+= render "images"
+
+= form_for @listing, url: listing_images_path(@listing), method: :post do |f| # use customized url endpoint
+  .field
+    = f.file_field :images, multiple: true
+
+  .actions
+    = f.submit "Add More Images"
 
 = link_to 'Show', @listing
 \|

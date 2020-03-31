@@ -13,8 +13,13 @@
         = text_field :listing, col
     - else
       .field
-        Upload Photo
-        = f.file_field :images, multiple: true
+        - if page == "new"
+          Upload Photos
+          = f.file_field :images, multiple: true
 
   .actions
-    = f.submit 'Save'
+    - if page == "new"
+      = f.submit 'Save'
+    - elsif page == "edit"
+      = f.submit 'Save Basic Info'
+
