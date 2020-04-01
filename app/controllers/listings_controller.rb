@@ -4,7 +4,6 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy, :show_review]
 
   def index
-    # debugger
     conditions = index_condition_extract
     sorted_col = get_sorted_col
     search_query = params['queryTbx']
@@ -37,22 +36,29 @@ class ListingsController < ApplicationController
   end
 
   def create
+
     @listing = Listing.new(listing_params)
     time_now = Time.now.getutc
     @listing.created_at = time_now
     @listing.updated_at = time_now
     specific_address = [@listing.address, @listing.city, @listing.state, @listing.zipcode].join(', ')
-    new_listing_loc = Listing.get_long_lat_by_address(specific_address)
-    @listing.lon, @listing.lat = new_listing_loc[:lon.to_s], new_listing_loc[:lat.to_s]
-    flash[:notice] = if @listing.save
+    new_listing_loc, valid_address_flag = Listing.get_long_lat_by_address(specific_address), true
+    # check the validity of the input address
+    if new_listing_loc.empty?
+      valid_address_flag = false
+    else
+      @listing.lon, @listing.lat = new_listing_loc[:lon.to_s], new_listing_loc[:lat.to_s]
+    end
+    flash[:notice] = if valid_address_flag and @listing.save
                        'New listing added successfully!'
                      else
-                       'Failed to Add New listing'
+                       'Failed to Add New listing, please try again.'
                      end
-    redirect_to action: "index"
+    redirect_to listings_index_path
   end
 
   def new
+    gon.azure_map_key = azure_map_key
     if not session.keys.include?"customer_id" or Customer.where(id: session[:customer_id]).empty?
       flash[:notice] = "Please sign in before posting a new listing, thanks."
       redirect_to login_path
@@ -62,6 +68,7 @@ class ListingsController < ApplicationController
   end
 
   def edit
+    gon.azure_map_key = azure_map_key
     @listing = set_listing
     if cur_customer_id != @listing.customer_id
       redirect_to listings_index_path, notice: 'Unauthorized access to the Edit page of others\' listing.'
@@ -74,15 +81,17 @@ class ListingsController < ApplicationController
     respond_to do |format|
       updated_listing = listing_params
       specific_address = [updated_listing['address'], updated_listing['city'], updated_listing['state'], updated_listing['zipcode']].join(', ')
+      # updated_listing_loc, valid_address_flag = Listing.get_long_lat_by_address(specific_address), true
       updated_listing = updated_listing.merge(Listing.get_long_lat_by_address(specific_address))
       if cur_customer_id != @temp.customer_id
         # Prevent illegal update others' listings
         format.html { redirect_to listings_index_path, notice: 'Unauthorized Edit Operation was banned.' }
         format.json { render json: @listing.errors, status: :unprocessable_entity }
-      elsif Listing.validate(listing_params) and @listing.update(updated_listing)
+      elsif Listing.validate(updated_listing) and @listing.update(updated_listing)
         format.html { redirect_to @listing, notice: 'Listing was successfully updated.' }
         format.json { render :show, status: :ok, location: @listing }
       else
+        flash[:notice] = 'Listing Edit operation failed. Please check your location information.'
         format.html { render :edit }
         format.json { render json: @listing.errors, status: :unprocessable_entity }
       end

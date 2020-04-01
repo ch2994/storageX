@@ -6,9 +6,6 @@ var geocodeServiceUrlTemplate = 'https://atlas.microsoft.com/search/{searchType}
                                 'api-version=1&query={query}&language={language}&' +
                                 'lon={lon}&lat={lat}&countrySet={countrySet}&view=Auto';
 
-// jQuery(window).bind("onunload", PreventCache())
-debugger;
-
 function PreventCache(){
     // console.log("Unload Map!");
     GetMap();

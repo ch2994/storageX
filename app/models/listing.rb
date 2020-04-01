@@ -59,9 +59,12 @@ class Listing < ActiveRecord::Base
                        .gsub('{numResults}','1')
 
     geo_http_response = JSON.parse(HTTP.get(geo_http_request).body)
-    location = geo_http_response['results'][0]['position']
-
-    return location
+    if geo_http_response["results"].empty?
+      return {}
+    else
+      location = geo_http_response['results'][0]['position']
+      return location
+    end
   end
 
   def self.user_filter(conditions=nil, sorted_col=nil, search_query=nil)
@@ -88,6 +91,9 @@ class Listing < ActiveRecord::Base
   end
 
   def self.validate(listing_params)
+    if not listing_params.key?('lon') or not listing_params.key?('lat')
+      return false
+    end
     return true
   end
 
