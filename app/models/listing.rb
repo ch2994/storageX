@@ -66,6 +66,7 @@ class Listing < ActiveRecord::Base
 
   def self.user_filter(conditions=nil, sorted_col=nil, search_query=nil)
     if not search_query.nil?
+      # default show listings only at most 10 miles far away from the search point
       center_loc = get_long_lat_by_address(search_query)
       search_conditions = "lat <= #{center_loc['lat']+0.1} "\
                           "and lat >= #{center_loc['lat']-0.1} "\

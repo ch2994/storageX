@@ -34,6 +34,9 @@ class ListingsController < ApplicationController
     time_now = Time.now.getutc
     @listing.created_at = time_now
     @listing.updated_at = time_now
+    specific_address = [@listing.address, @listing.city, @listing.state, @listing.zipcode].join(', ')
+    new_listing_loc = Listing.get_long_lat_by_address(specific_address)
+    @listing.lon, @listing.lat = new_listing_loc[:lon.to_s], new_listing_loc[:lat.to_s]
     flash[:notice] = if @listing.save
                        'New listing added successfully!'
                      else
