@@ -2,7 +2,11 @@
 
 %h3 Your Own Listings
 
-= link_to 'Add New Listing', new_listing_path
+%br
+
+= button_to 'Add New Listing', new_listing_path, :method => :get
+
+%br
 
 = form_tag listings_path, :method => :get, id: "zipcode filter" do
   = label :condition, :zipcode, 'Zip Code'

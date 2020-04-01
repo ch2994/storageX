@@ -10,12 +10,12 @@ var geocodeServiceUrlTemplate = 'https://atlas.microsoft.com/search/{searchType}
 debugger;
 
 function PreventCache(){
-    console.log("Unload Map!");
+    // console.log("Unload Map!");
     GetMap();
 }
 
 window.addEventListener("load", GetMap, false);
-// window.onbeforeunload = PreventCache()s
+window.onbeforeunload = PreventCache()
 
 function GetMap() {
     //Initialize a map instance.
