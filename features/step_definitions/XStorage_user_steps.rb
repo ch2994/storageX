@@ -149,5 +149,5 @@ And(/^I create a valid listing$/) do
   fill_in 'listing[city]', with: 'New York'
   fill_in 'listing[state]', with: 'NY'
   fill_in 'listing[size]', with: '200'
-  click_button 'Save Changes'
+  click_button 'Save'
 end
