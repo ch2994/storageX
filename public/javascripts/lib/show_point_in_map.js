@@ -1,25 +1,9 @@
-// Reference: Microsoft Azure Fuzzy Search Sample
 var map;
 
-var geocodeServiceUrlTemplate = 'https://atlas.microsoft.com/search/{searchType}/json?' +
-                                'typeahead=true&subscription-key={subscription-key}&' +
-                                'api-version=1&query={query}&language={language}&' +
-                                'lon={lon}&lat={lat}&countrySet={countrySet}&view=Auto';
-
-// jQuery(window).bind("onunload", PreventCache())
-debugger;
-
-function PreventCache(){
-    console.log("Unload Map!");
-    GetMap();
-}
-
-window.addEventListener("load", GetMap, false);
-// window.onbeforeunload = PreventCache()s
+// var geocodeServiceUrlTemplate = 'https://atlas.microsoft.com/search/{searchType}/json?typeahead=true&subscription-key={subscription-key}&api-version=1&query={query}&language={language}&lon={lon}&lat={lat}&countrySet={countrySet}&view=Auto';
 
 function GetMap() {
     //Initialize a map instance.
-    // alert('Hi! Map is loading.')
     map = new atlas.Map('MapDisplay', {
         view: 'Auto',
         center: [-74.00723, 40.71305],

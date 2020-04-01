@@ -5,28 +5,34 @@ class ListingsController < ApplicationController
 
   def index
     # debugger
-    if params[:condition].nil?
-      conditions = session[:conditions] = Listing.standardize_conditions(session[:conditions])
-    else
-      conditions = Listing.standardize_conditions(params[:condition])
-    end
-    sorted_col = params[:sorted_col].nil??session[:sorted_col]:params[:sorted_col]
+    conditions = index_condition_extract
+    sorted_col = get_sorted_col
     search_query = params['queryTbx']
     gon.azure_map_key = Listing.azure_map_key
     @all_listings = Listing.user_filter(conditions, sorted_col, search_query)
-    if not search_query.nil?
-      gon.map_center = Listing.get_long_lat_by_address(search_query)
-      flash[:search_query] = search_query
+    if not cur_customer_id.nil?
+      @all_listings = @all_listings.where("customer_id != #{cur_customer_id}")
     end
-    session[:sorted_col] = sorted_col
-    session[:conditions] = conditions
+    store_situations_for_index(search_query, sorted_col, conditions)
+  end
 
-    @listings = Listing.where(:customer_id => session['customer_id'])
+  def my_listings_index
+    conditions = index_condition_extract
+    sorted_col = get_sorted_col
+    search_query = params['queryTbx']
+    gon.azure_map_key = azure_map_key
+    @all_listings = Listing.user_filter(conditions, sorted_col, search_query)
+    if not cur_customer_id.nil?
+      @all_listings = @all_listings.where(:customer_id => cur_customer_id)
+    else
+      redirect_to login_path
+    end
+    store_situations_for_index(search_query, sorted_col, conditions)
   end
 
   def show
-    id = params[:id] # retrieve movie ID from URI route
-    @listing = Listing.find(id) # look up movie by unique ID
+    id = params[:id]
+    @listing = Listing.find(id)
     # will render app/views/movies/show.<extension> by default
   end
 
@@ -90,6 +96,7 @@ class ListingsController < ApplicationController
   def show_review
     @current_review = Review.find_by_listing_id(params[:id])
   end
+
   private
 
   def set_listing
@@ -98,6 +105,32 @@ class ListingsController < ApplicationController
 
   def cur_customer_id
     return session['customer_id']
+  end
+
+  def get_sorted_col
+    return params[:sorted_col].nil??session[:sorted_col]:params[:sorted_col]
+  end
+
+  def index_condition_extract
+    if params[:condition].nil?
+      conditions = session[:conditions] = Listing.standardize_conditions(session[:conditions])
+    else
+      conditions = Listing.standardize_conditions(params[:condition])
+    end
+    return conditions
+  end
+
+  def azure_map_key
+    return Listing.azure_map_key
+  end
+
+  def store_situations_for_index(search_query=nil, sorted_col=nil, conditions=nil)
+    if not search_query.nil?
+      gon.map_center = Listing.get_long_lat_by_address(search_query)
+      flash[:search_query] = search_query
+    end
+    session[:sorted_col] = sorted_col
+    session[:conditions] = conditions
   end
 
   def listing_params
