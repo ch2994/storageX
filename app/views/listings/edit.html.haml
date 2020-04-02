@@ -1,6 +1,5 @@
 %h2 Edit Listing : Basic Info
 
-<<<<<<< HEAD
 = include_gon
 
 = stylesheet_link_tag "https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"
@@ -16,11 +15,10 @@
 
 .row
   .column{style:"float: left; position: relative; left: 20px"}
-    = render 'form'
+    = render 'form', page: "edit"
   .column{style:"float: left; position: relative; left: 50px"}
     %div{:id=>"MapDisplay", :style=>"position:relative;width:200%;min-width:300px;min-height:500px;"}
-=======
-= render 'form', page: "edit"
+
 
 %h2 Edit Listing : Photos
 
@@ -34,7 +32,6 @@ Current Photos:
 
   .actions
     = f.submit "Add More Images"
->>>>>>> 58f4d817bce9f2d3ee9cd479e58d6130c9850091
 
 = link_to 'Show', @listing
 \|
