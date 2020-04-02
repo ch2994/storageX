@@ -29,7 +29,7 @@
                 %li.nav-item
                   %a.nav-link{:href => bookings_path(current_customer)} My Bookings
                 %li.nav-item
-                  %a.nav-link{:href => listings_path(current_customer)} My Listings
+                  %a.nav-link{:href => show_mine_path(current_customer)} My Listings
                 %li.nav-item
                   %a.nav-link{:href => logout_path} log out
               - else

@@ -17,9 +17,13 @@
           Upload Photos
           = f.file_field :images, multiple: true
 
+  = button_tag "Location Check", type: 'button', onclick: "check_for_listing_address()"
+
   .actions
+    %br
+    %br
     - if page == "new"
-      = f.submit 'Save'
+      = f.submit 'Save', method: :post, data: { confirm: "Is your listing's location in the map correct? \n\n(Please check it by \"Location Check\" button before submission)" }
     - elsif page == "edit"
-      = f.submit 'Save Basic Info'
+      = f.submit 'Save Basic Info', method: :post, data: { confirm: "Is your listing's location in the map correct? \n\n(Please check it by \"Location Check\" button before submission)" }
 

@@ -37,6 +37,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+# transmit value to Javascript file
+gem 'gon'
+# gem 'rabl-rails'
+
+# HTTP request
+gem 'url'
+gem 'http'
+gem 'json'
+
 gem 'haml-rails', '~> 1.0.0'
 
 gem 'bcrypt', '~> 3.1.7'
