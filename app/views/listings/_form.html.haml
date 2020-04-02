@@ -13,12 +13,17 @@
         = text_field :listing, col
     - else
       .field
-        Upload Photo
-        = f.file_field :images, multiple: true
+        - if page == "new"
+          Upload Photos
+          = f.file_field :images, multiple: true
 
   = button_tag "Location Check", type: 'button', onclick: "check_for_listing_address()"
 
   .actions
     %br
     %br
-    = f.submit 'Save', method: :post, data: { confirm: "Is your listing's location in the map correct? \n\n(Please check it by \"Location Check\" button before submission)" }
+    - if page == "new"
+      = f.submit 'Save', method: :post, data: { confirm: "Is your listing's location in the map correct? \n\n(Please check it by \"Location Check\" button before submission)" }
+    - elsif page == "edit"
+      = f.submit 'Save Basic Info', method: :post, data: { confirm: "Is your listing's location in the map correct? \n\n(Please check it by \"Location Check\" button before submission)" }
+

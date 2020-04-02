@@ -61,6 +61,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :listings do
+    resources :images, :only => [:create, :destroy]
+  end
 
   get 'users/index'
 
