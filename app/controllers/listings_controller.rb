@@ -81,7 +81,6 @@ class ListingsController < ApplicationController
     respond_to do |format|
       updated_listing = listing_params
       specific_address = [updated_listing['address'], updated_listing['city'], updated_listing['state'], updated_listing['zipcode']].join(', ')
-      # updated_listing_loc, valid_address_flag = Listing.get_long_lat_by_address(specific_address), true
       updated_listing = updated_listing.merge(Listing.get_long_lat_by_address(specific_address))
       if cur_customer_id != @temp.customer_id
         # Prevent illegal update others' listings
@@ -108,44 +107,44 @@ class ListingsController < ApplicationController
 
   private
 
-  def set_listing
-    @listing = Listing.find(params[:id])
-  end
-
-  def cur_customer_id
-    return session['customer_id']
-  end
-
-  def get_sorted_col
-    return params[:sorted_col].nil??session[:sorted_col]:params[:sorted_col]
-  end
-
-  def index_condition_extract
-    if params[:condition].nil?
-      conditions = session[:conditions] = Listing.standardize_conditions(session[:conditions])
-    else
-      conditions = Listing.standardize_conditions(params[:condition])
+    def set_listing
+      @listing = Listing.find(params[:id])
     end
-    return conditions
-  end
 
-  def azure_map_key
-    return Listing.azure_map_key
-  end
-
-  def store_situations_for_index(search_query=nil, sorted_col=nil, conditions=nil)
-    if not search_query.nil?
-      gon.map_center = Listing.get_long_lat_by_address(search_query)
-      flash[:search_query] = search_query
+    def cur_customer_id
+      return session['customer_id']
     end
-    session[:sorted_col] = sorted_col
-    session[:conditions] = conditions
-  end
 
-  def listing_params
-    params_new = params.require(:listing).permit(Listing::sym2name.except(:images).keys, {images: []})
-    params_new[:id] = params[:id]
-    params_new[:customer_id] = cur_customer_id
-    return params_new
-  end
+    def get_sorted_col
+      return params[:sorted_col].nil??session[:sorted_col]:params[:sorted_col]
+    end
+
+    def index_condition_extract
+      if params[:condition].nil?
+        conditions = session[:conditions] = Listing.standardize_conditions(session[:conditions])
+      else
+        conditions = Listing.standardize_conditions(params[:condition])
+      end
+      return conditions
+    end
+
+    def azure_map_key
+      return Listing.azure_map_key
+    end
+
+    def store_situations_for_index(search_query=nil, sorted_col=nil, conditions=nil)
+      if not search_query.nil?
+        gon.map_center = Listing.get_long_lat_by_address(search_query)
+        flash[:search_query] = search_query
+      end
+      session[:sorted_col] = sorted_col
+      session[:conditions] = conditions
+    end
+
+    def listing_params
+      params_new = params.require(:listing).permit(Listing::sym2name.except(:images).keys, {images: []})
+      params_new[:id] = params[:id]
+      params_new[:customer_id] = cur_customer_id
+      return params_new
+    end
 end
