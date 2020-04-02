@@ -101,7 +101,7 @@ class Listing < ActiveRecord::Base
 
   private
     def self.valid_range_query(center_point)
-      # default show listings only at most 15 miles far away from the search point
+      # default show listings only at most 10 miles far away from the search point
       return "lat <= #{center_point['lat']+0.1} "\
               "and lat >= #{center_point['lat']-0.1} "\
               "and lon <= #{center_point['lon']+0.1} "\
