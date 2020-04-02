@@ -27,12 +27,14 @@ class Listing < ActiveRecord::Base
                :size => 'Size (Cubic Meter)',
                :images => 'Upload images'}
 
+
   class << self
     attr_reader :valid_sort_cols
     attr_reader :sym2name
     attr_reader :index_display_cols
     attr_reader :azure_map_key
   end
+
 
   def self.standardize_conditions(conditions)
     if conditions.nil?
@@ -46,6 +48,7 @@ class Listing < ActiveRecord::Base
     end
     conditions_new
   end
+
 
   def self.get_long_lat_by_address(specific_address)
     geocodeUrlTemplate = 'https://atlas.microsoft.com/search/address/json?'\
@@ -67,18 +70,15 @@ class Listing < ActiveRecord::Base
     end
   end
 
+
   def self.user_filter(conditions=nil, sorted_col=nil, search_query=nil)
-    if not search_query.nil?
-      # default show listings only at most 10 miles far away from the search point
-      center_loc = get_long_lat_by_address(search_query)
-      search_conditions = "lat <= #{center_loc['lat']+0.1} "\
-                          "and lat >= #{center_loc['lat']-0.1} "\
-                          "and lon <= #{center_loc['lon']+0.1} "\
-                          "and lon >= #{center_loc['lon']-0.1}"
-      after_search_items = self.where(search_conditions)
-    else
-      after_search_items = self.all
-    end
+    center_loc = (not search_query.nil?)?\
+                    get_long_lat_by_address(search_query):\
+                    # default coordinate center is in New York
+                    {:lat.to_s=> 40.71305, :lon.to_s=> -74.00723}
+    search_conditions = self.valid_range_query(center_loc)
+    after_search_items = self.where(search_conditions)
+
     if (conditions.nil? or conditions.empty?) and (sorted_col.nil? or !@valid_sort_cols.include?sorted_col.to_sym)
       return after_search_items.all
     elsif conditions.nil? or conditions.empty?
@@ -90,11 +90,22 @@ class Listing < ActiveRecord::Base
     end
   end
 
+
   def self.validate(listing_params)
     if not listing_params.key?('lon') or not listing_params.key?('lat')
       return false
     end
     return true
   end
+
+
+  private
+    def self.valid_range_query(center_point)
+      # default show listings only at most 10 miles far away from the search point
+      return "lat <= #{center_point['lat']+0.1} "\
+              "and lat >= #{center_point['lat']-0.1} "\
+              "and lon <= #{center_point['lon']+0.1} "\
+              "and lon >= #{center_point['lon']-0.1}"
+    end
 
 end
