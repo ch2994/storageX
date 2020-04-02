@@ -75,7 +75,7 @@ class Listing < ActiveRecord::Base
     center_loc = (not search_query.nil?)?\
                     get_long_lat_by_address(search_query):\
                     # default coordinate center is in New York
-                    {:lat.to_s=> 40.71305, :lon.to_s=> -74.00723}
+                    {:lat.to_s=> 40.73305, :lon.to_s=> -74.00723}
     search_conditions = self.valid_range_query(center_loc)
     after_search_items = self.where(search_conditions)
 
@@ -101,7 +101,7 @@ class Listing < ActiveRecord::Base
 
   private
     def self.valid_range_query(center_point)
-      # default show listings only at most 10 miles far away from the search point
+      # default show listings only at most 15 miles far away from the search point
       return "lat <= #{center_point['lat']+0.1} "\
               "and lat >= #{center_point['lat']-0.1} "\
               "and lon <= #{center_point['lon']+0.1} "\

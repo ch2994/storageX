@@ -19,8 +19,8 @@ function GetMap() {
     // alert('Hi! Map is loading.')
     map = new atlas.Map('MapDisplay', {
         view: 'Auto',
-        center: [-74.00723, 40.71305],
-        zoom: 12,
+        center: [-74.00723, 40.73305],
+        zoom: 11,
         authOptions: {
             authType: 'subscriptionKey',
             subscriptionKey: gon.azure_map_key
@@ -42,6 +42,9 @@ function GetMap() {
 
         //Add a layer for rendering point data.
         map.layers.add(new atlas.layer.SymbolLayer(datasource));
+
+        //Add all listing points on the map according to the result
+        datasource.add(new atlas.data.Feature(new atlas.data.MultiPoint(gon.listings_coordinates)));
 
         //Create a jQuery autocomplete UI widget.
         $("#queryTbx").autocomplete({

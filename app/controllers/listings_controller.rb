@@ -12,6 +12,11 @@ class ListingsController < ApplicationController
     if not cur_customer_id.nil?
       @all_listings = @all_listings.where("customer_id != #{cur_customer_id}")
     end
+    # support map mode display by passing all listings' coordinates to front-end
+    gon.listings_coordinates = []
+    @all_listings.each do |one_listing|
+      gon.listings_coordinates.append([one_listing.lon,one_listing.lat])
+    end
     store_situations_for_index(search_query, sorted_col, conditions)
   end
 
