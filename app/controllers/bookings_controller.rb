@@ -89,7 +89,6 @@ class BookingsController < ApplicationController
     @all_reviews = Review.where(:customer_id => session[:customer_id])
     id = params[:id]
     @listing = Listing.find(id)
-    debugger
   end
 
   private

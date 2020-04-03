@@ -13,7 +13,6 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/new
   def new
-    debugger
     @listing_id = Listing.where()
   end
 
@@ -24,7 +23,6 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
-    debugger
     @review = Review.new(review_params)
 
     respond_to do |format|

@@ -43,7 +43,6 @@ class ImagesUploader < CarrierWave::Uploader::Base
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
   #   newFileName = SecureRandom.base64[0,8] + '.jpg'
-  #   debugger
   #   newFileName
   # end
 end
