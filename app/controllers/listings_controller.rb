@@ -15,7 +15,12 @@ class ListingsController < ApplicationController
       conditions = Listing.standardize_conditions(params[:condition])
     end
     sorted_col = params[:sorted_col].nil??session[:sorted_col]:params[:sorted_col]
+    @avg_ratings = []
     @all_listings = Listing.user_filter(conditions, sorted_col)
+    @all_listings.each do |listing|
+      rating = Review.where(:listing_id => listing['id']).average("rating")
+      @avg_ratings.append(rating)
+    end
     session[:sorted_col] = sorted_col
     session[:conditions] = conditions
     @listings = Listing.where(:customer_id => session['customer_id'])
@@ -24,6 +29,7 @@ class ListingsController < ApplicationController
   def show
     id = params[:id] # retrieve movie ID from URI route
     @listing = Listing.find(id) # look up movie by unique ID
+    @all_reviews = Review.where(:listing_id => params[:id])
     # will render app/views/movies/show.<extension> by default
   end
 

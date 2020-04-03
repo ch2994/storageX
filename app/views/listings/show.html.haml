@@ -20,6 +20,18 @@
   = @listing.daily_price
 -# - debugger
 
+%table#listings.table.table-striped.col-md-12{id:'listing_review_table'}
+  %thead
+    %th Customer
+    %th Rating
+    %th Comments
+  %tbody
+    -@all_reviews.each do |review|
+      %tr
+        -Review::index_display_cols.each do |col|
+          %td= review[col]
+
+
 = button_to 'Book', new_booking_path(:listing_id => @listing), :class => 'btn btn-primary', :method => 'post'
 
 

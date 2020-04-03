@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'listings/show_review'
 
-  resources :reviews
+  # resources :reviews
   resources :customers, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
   get 'signup', to: 'customers#new', as: 'signup'
@@ -12,10 +12,13 @@ Rails.application.routes.draw do
 
   resources :customers
 
+  # nested RESTful routes
   resources :bookings do
     member do
       get :show_review
+      resources :reviews
     end
+
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
