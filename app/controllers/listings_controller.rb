@@ -16,7 +16,7 @@ class ListingsController < ApplicationController
     gon.listings_coordinates, @avg_ratings = [], []
     @all_listings.each do |one_listing|
       gon.listings_coordinates.append([one_listing.lon,one_listing.lat])
-      rating = Review.where(:listing_id => listing['id']).average("rating")
+      rating = Review.where(:listing_id => one_listing['id']).average("rating")
       @avg_ratings.append(rating)
     end
     store_situations_for_index(search_query, sorted_col, conditions)
