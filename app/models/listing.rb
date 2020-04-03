@@ -9,7 +9,6 @@ class Listing < ActiveRecord::Base
   # def initialize()
   #   super.initialize()
   #   @azure_map_key = Geo_function_initializer.new.azure_map_key
-  #   debugger
   # end
 
   @azure_map_key = Geo_function_initializer.new.azure_map_key

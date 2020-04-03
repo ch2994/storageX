@@ -81,8 +81,6 @@ function GetMap() {
                 //Run the preventDefault first, and then we could modify the input field value.
                 event.preventDefault();
 
-                // debugger;
-
                 document.getElementById("queryTbx").value = ui.item.address.freeformAddress
                 // $("queryTbx").val = ui.item.address.freeformAddress
 

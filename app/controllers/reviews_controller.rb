@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/new
   def new
-    @review = Review.new
+    @listing_id = Listing.where()
   end
 
   # GET /reviews/1/edit
@@ -27,7 +27,7 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
+        format.html { redirect_to bookings_path, notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new }
@@ -68,6 +68,10 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.fetch(:review, {})
+      params_new = params.require(:review).permit(:rating, :comments)
+      params_new[:customer_id] = session[:customer_id]
+      @bookings = Booking.find(params[:id])
+      params_new[:listing_id] = @bookings.listing_id
+      params_new
     end
 end

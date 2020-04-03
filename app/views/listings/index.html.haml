@@ -32,6 +32,7 @@
 %table#listings.table.table-striped.col-md-12{id:'listing_table'}
   %thead
     %tr
+      %th #
       - Listing::index_display_cols.each do |col|
         - if col == flash[:sorted_col]
           %th.hilite= Listing::sym2name[col]
@@ -39,14 +40,20 @@
           %th= link_to Listing::sym2name[col], listings_path(:sorted_col => col)
         - else
           %th= Listing::sym2name[col]
-      %th{:colspan => 3} Options
+      %th Ratings
+      %th{:colspan => 1} Options
+
   %tbody
+    - counter = 0
     - @all_listings.each do |listing|
       %tr
+        %td= counter+1
         - Listing::index_display_cols.each do |col|
           %td= listing[col]
+        %td= @avg_ratings[counter]
         %td= link_to "More Details", listing
-        %td= link_to "Reviews", show_review_listing_path(listing)
+        - counter += 1
+
 %h5 Map Mode for Listings
 -#(To be improved)
 %div{:id=>"MapDisplay", :style=>"position:relative;width:100%;min-width:290px;height:500px;"}

@@ -13,9 +13,11 @@ class ListingsController < ApplicationController
       @all_listings = @all_listings.where("customer_id != #{cur_customer_id}")
     end
     # support map mode display by passing all listings' coordinates to front-end
-    gon.listings_coordinates = []
+    gon.listings_coordinates, @avg_ratings = [], []
     @all_listings.each do |one_listing|
       gon.listings_coordinates.append([one_listing.lon,one_listing.lat])
+      rating = Review.where(:listing_id => one_listing['id']).average("rating")
+      @avg_ratings.append(rating)
     end
     store_situations_for_index(search_query, sorted_col, conditions)
   end
@@ -35,8 +37,9 @@ class ListingsController < ApplicationController
   end
 
   def show
-    id = params[:id]
-    @listing = Listing.find(id)
+    id = params[:id] # retrieve movie ID from URI route
+    @listing = Listing.find(id) # look up movie by unique ID
+    @all_reviews = Review.where(:listing_id => params[:id])
     # will render app/views/movies/show.<extension> by default
   end
 

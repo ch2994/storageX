@@ -18,7 +18,7 @@
         %td= link_to 'Show', booking
         %td= link_to 'Edit', edit_booking_path(booking)
         %td= link_to 'Delete', booking, method: :delete, data: { confirm: 'Are you sure?' }
-        %td= link_to 'Review', show_review_booking_path(booking)
+        %td= link_to 'Review', new_review_path(booking)
 %br
 
 = link_to 'New Booking', listings_path
