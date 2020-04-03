@@ -2,8 +2,6 @@
 -# in app/views/listings/show.html.haml
 %h3 Details about :  #{@listing.name}
 
-= button_to 'Book', new_booking_path(:listing_id => @listing), :class => 'btn btn-primary', :method => 'post'
-
 %ul#details
 %li
   Location:
