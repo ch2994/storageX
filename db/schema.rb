@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200402162141) do
+ActiveRecord::Schema.define(version: 20200403012654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,8 +55,12 @@ ActiveRecord::Schema.define(version: 20200402162141) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.decimal  "rating",      precision: 3, scale: 1, null: false
+    t.text     "comments"
+    t.integer  "customer_id",                         null: false
+    t.integer  "listing_id",                          null: false
   end
 
   add_foreign_key "bookings", "customers"
