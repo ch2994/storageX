@@ -52,6 +52,7 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1.json
   def update
     @temp = set_booking
+
     @temp[:start_date] = DateTime.new(booking_params["start_date(1i)"].to_i,
                                       booking_params["start_date(2i)"].to_i,
                                       booking_params["start_date(3i)"].to_i)
@@ -60,7 +61,11 @@ class BookingsController < ApplicationController
                                       booking_params["end_date(3i)"].to_i)
     @temp[:updated_at] = DateTime.now
     respond_to do |format|
-      if Booking.validate(booking_params) and Booking.time_checking(@temp) and @booking.update(booking_params)
+      if cur_customer_id != @temp.customer_id：
+        # Prevent illegal update others' listings
+        format.html { redirect_to listings_index_path, notice: 'Unauthorized Edit Operation was banned.' }
+        format.json { render json: @listing.errors, status: :unprocessable_entity }
+      elsif Booking.validate(booking_params) and Booking.time_checking(@temp) and @booking.update(booking_params)
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
@@ -91,6 +96,10 @@ class BookingsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
       @booking = Booking.find(params[:id])
+    end
+
+    def cur_customer_id
+      return session['customer_id']
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

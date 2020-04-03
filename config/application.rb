@@ -22,5 +22,6 @@ module StorageX
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    # config.assets.precompile += ['fuzzy_search.js', 'show_point_in_map.js']
   end
 end

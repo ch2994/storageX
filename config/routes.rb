@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'listings#index'
+  get 'listings/mine', to: 'listings#my_listings_index', as: 'show_mine'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -63,6 +64,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :listings do
+    resources :images, :only => [:create, :destroy]
+  end
 
   get 'users/index'
 

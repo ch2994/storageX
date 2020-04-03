@@ -1,0 +1,34 @@
+-#  This file is app/views/listings/my_listings_index.html.haml
+
+%h3 Your Own Listings
+
+%br
+
+= button_to 'Add New Listing', new_listing_path, :method => :get
+
+%br
+
+= form_tag listings_path, :method => :get, id: "zipcode filter" do
+  = label :condition, :zipcode, 'Zip Code'
+  = text_field :condition, 'zipcode'
+  = submit_tag 'Filter'
+
+%table#listings.table.table-striped.col-md-12{id:'listing_table'}
+  %thead
+    %tr
+      - Listing::index_display_cols.each do |col|
+        - if col == flash[:sorted_col]
+          %th.hilite= Listing::sym2name[col]
+        - elsif Listing::valid_sort_cols.include?col
+          %th= link_to Listing::sym2name[col], listings_path(:sorted_col => col)
+        - else
+          %th= Listing::sym2name[col]
+      %th{:colspan => 4} Options
+  %tbody
+    - @all_listings.each do |listing|
+      %tr
+        - Listing::index_display_cols.each do |col|
+          %td= listing[col]
+        %td= link_to "More Details", listing
+        %td= link_to "Edit", edit_listing_path(listing)
+        %td= link_to "Reviews", show_review_listing_path(listing)

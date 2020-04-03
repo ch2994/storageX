@@ -29,7 +29,7 @@
                 %li.nav-item
                   %a.nav-link{:href => bookings_path(current_customer)} My Bookings
                 %li.nav-item
-                  %a.nav-link{:href => listings_path(current_customer)} My Listings
+                  %a.nav-link{:href => show_mine_path(current_customer)} My Listings
                 %li.nav-item
                   %a.nav-link{:href => logout_path} log out
               - else
@@ -37,17 +37,6 @@
                   %a.nav-link{:href => signup_path} sign up
                 %li.nav-item
                   %a.nav-link{:href => login_path} log in
-
-
-              -#%li.nav-item.dropdown
-              -#  %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => false, "href" => "#", "aria-haspopup" => true, "data-toggle" => "dropdown", :role => "button"}
-              -#    Dropdown link
-              -#  %ul.dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
-              -#    %a.dropdown-item{:href => "#"} Action
-              -#    %a.dropdown-item{:href => "#"} Another action
-              -#    %a.dropdown-item{:href => "#"} Something else here
-
-
 
         #main
           - if flash[:notice]

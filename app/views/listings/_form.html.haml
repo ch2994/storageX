@@ -6,34 +6,24 @@
         - @listing.errors.full_messages.each do |message|
           %li= message
 
+  - Listing::sym2name.keys.each do |col|
+    - if col != :images
+      .field
+        = f.label :listing, Listing::sym2name[col]
+        = text_field :listing, col
+    - else
+      .field
+        - if page == "new"
+          Upload Photos
+          = f.file_field :images, multiple: true
 
-  .field
-    = f.label :name
-    = f.text_field :name
-
-  .field
-    = f.label :address
-    = f.text_field :address
-
-  .field
-    = f.label :zipcode
-    = f.text_field  :zipcode
-
-  .field
-    = f.label :city
-    = f.text_field :city
-
-  .field
-    = f.label :state
-    = f.text_field :state
-
-  .field
-    = f.label :daily_price
-    = f.number_field  :daily_price
-
-  .field
-    = f.label :size
-    = f.number_field  :size
+  = button_tag "Location Check", type: 'button', onclick: "check_for_listing_address()"
 
   .actions
-    = f.submit 'Save'
+    %br
+    %br
+    - if page == "new"
+      = f.submit 'Save', method: :post, data: { confirm: "Is your listing's location in the map correct? \n\n(Please check it by \"Location Check\" button before submission)" }
+    - elsif page == "edit"
+      = f.submit 'Save Basic Info', method: :post, data: { confirm: "Is your listing's location in the map correct? \n\n(Please check it by \"Location Check\" button before submission)" }
+

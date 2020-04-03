@@ -37,6 +37,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+# transmit value to Javascript file
+gem 'gon'
+# gem 'rabl-rails'
+
+# HTTP request
+gem 'url'
+gem 'http'
+gem 'json'
+
 gem 'haml-rails', '~> 1.0.0'
 
 gem 'bcrypt', '~> 3.1.7'
@@ -44,6 +53,10 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 #
+gem 'carrierwave', '~> 1.0'
+gem "fog-aws"
+gem "figaro", '~> 1.0.0'
+gem "mini_magick"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
