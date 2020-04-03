@@ -86,7 +86,10 @@ class BookingsController < ApplicationController
   end
 
   def show_review
-
+    @all_reviews = Review.where(:customer_id => session[:customer_id])
+    id = params[:id]
+    @listing = Listing.find(id)
+    debugger
   end
 
   private
@@ -107,6 +110,6 @@ class BookingsController < ApplicationController
           params_new[:listing_id] = Booking.find(params[:id]).listing_id
       end
       params_new[:customer_id] = session[:customer_id]
-      params_new
+      return params_new
     end
 end
