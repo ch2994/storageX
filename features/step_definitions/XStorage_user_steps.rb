@@ -6,7 +6,7 @@ Given(/^The StorageX has following listings$/) do |table|
   table.rows().each do |listing|
     # table is a table.hashes.keys # => [:name, :address, :city, :state, :zipcode, :daily_price, :size, :customer_id, :created_at, :updated_at]
     Listing.create(:name => listing[0], :address => listing[1], :city => listing[2], :state => listing[3], :zipcode => listing[4],
-                   :daily_price => listing[5], :size => listing[6], :customer_id => listing[7])
+                   :daily_price => listing[5], :size => listing[6], :customer_id => listing[7], :lat => listing[10], :lon => listing[11])
   end
 end
 
@@ -98,7 +98,7 @@ And(/^I create two customer accounts$/) do
 end
 
 
-Given(/^StorageX has the following customers$/) do |table|
+Given(/^The StorageX has the following customers$/) do |table|
   # table is a table.hashes.keys # => [:username, :password_digest, :first_name, :last_name, :email, :phone, :created_at, :updated_at]
   table.rows().each do |listing|
     Customer.create(table.hashes)
@@ -120,7 +120,7 @@ end
 
 When(/^I click the "([^"]*)" link$/) do |arg|
   if arg == 'Add New Listing'
-    click_link('Add New Listing')
+    click_button('Add New Listing')
   end
 end
 
@@ -145,7 +145,7 @@ And(/^I create a valid listing$/) do
   fill_in 'listing[name]', with: 'TestListing'
   fill_in 'listing[zipcode]', with: '10019'
   fill_in 'listing[daily_price]', with: '100'
-  fill_in 'listing[address]', with: 'TestAddress'
+  fill_in 'listing[address]', with: '330 West 58th Street'
   fill_in 'listing[city]', with: 'New York'
   fill_in 'listing[state]', with: 'NY'
   fill_in 'listing[size]', with: '200'
