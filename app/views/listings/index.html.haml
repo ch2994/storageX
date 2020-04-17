@@ -9,6 +9,11 @@
 = javascript_include_tag "https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"
 = javascript_include_tag "lib/fuzzy_search.js"
 
+%header.jumbotron.my-4
+  %h1.display-3 A Warm Welcome!
+  %p.lead Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.
+  %a.btn.btn-primary.btn-lg{:href => "#"} Call to action!
+
 %h5 Get Your Ideal Listings
 .ui-widget
   = form_tag listings_path, :method => :get, id: "Search_Form" do
