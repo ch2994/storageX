@@ -20,19 +20,25 @@
 %table#listings.table.table-striped.col-md-12{id:'listing_table'}
   %thead
     %tr
+      %th #
       - Listing::index_display_cols.each do |col|
         - if col == flash[:sorted_col]
           %th.hilite= Listing::sym2name[col]
         - elsif Listing::valid_sort_cols.include?col
           %th= link_to Listing::sym2name[col], listings_path(:sorted_col => col)
+        - elsif col == :rating
+          %th= link_to Listing::sym2name[col], listings_path(:sorted_col => col)
         - else
           %th= Listing::sym2name[col]
-      %th{:colspan => 4} Options
+      %th{:colspan => 3} Options
   %tbody
+    - counter = 1
     - @all_listings.each do |listing|
       %tr
+        %td= counter
+        - counter += 1
         - Listing::index_display_cols.each do |col|
-          %td= listing[col]
-        %td= link_to "More Details", listing
-        %td= link_to "Edit", edit_listing_path(listing)
-        %td= link_to "Reviews", show_review_listing_path(listing)
+          %td= listing[col.to_s]
+        %td= link_to "More Details", listing_path(listing['id'])
+        %td= link_to "Edit", edit_listing_path(listing['id'])
+        %td= link_to "Delete", listing_path(listing['id']), :method => :delete

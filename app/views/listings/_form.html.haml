@@ -7,11 +7,11 @@
           %li= message
 
   - Listing::sym2name.keys.each do |col|
-    - if col != :images
+    - if col != :images and col != :rating
       .field
         = f.label :listing, Listing::sym2name[col]
         = text_field :listing, col
-    - else
+    - elsif col != :rating
       .field
         - if page == "new"
           Upload Photos
