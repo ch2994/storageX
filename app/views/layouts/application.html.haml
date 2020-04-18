@@ -16,10 +16,7 @@
             %span.navbar-toggler-icon
           #navbarNav.collapse.navbar-collapse
             %ul.navbar-nav
-              %li.nav-item.active
-                %a.nav-link{:href => root_path}
-                  Home
-                  %span.sr-only (current)
+              = button_to "Home", root_path, {method: :get, class: "btn btn-outline-dark"}
 
             %ul.navbar-nav.ml-auto
               - if current_customer
