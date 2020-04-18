@@ -8,57 +8,74 @@
 = stylesheet_link_tag "https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css"
 = javascript_include_tag "https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"
 = javascript_include_tag "lib/fuzzy_search.js"
+= stylesheet_link_tag "https://use.fontawesome.com/releases/v5.5.0/css/all.css"
 
 %header.jumbotron.my-4
   %h1.display-3 A Warm Welcome!
-  %p.lead Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.
-  %a.btn.btn-primary.btn-lg{:href => "#"} Call to action!
+  %br
+  %p.lead If you want your spare storage to make continuous money, please join us.
+  %br
+  = button_to "Post my storage", new_listing_path, :method => :get, class:"btn btn-primary btn-lg"
 
-%h5 Get Your Ideal Listings
-.ui-widget
+.container.h-100
   = form_tag listings_path, :method => :get, id: "Search_Form" do
-    - if flash[:search_query].nil?
-      = search_field_tag 'queryTbx', nil, :placeholder => "Search.."
-    - else
-      = search_field_tag 'queryTbx', flash[:search_query], :placeholder => "Search.."
-    = submit_tag 'Submit'
+    .ui-widget
+      .row
+        .col-7.col-lg-8
+          - if flash[:search_query].nil?
+            = search_field_tag 'queryTbx', nil, :placeholder => "Search..", class:"form-control", style:"width:100%;"
+          - else
+            = search_field_tag 'queryTbx', flash[:search_query], :placeholder => "Search..", class:"form-control", style:"width:100%;"
+        .col-5.col-lg-4
+          = submit_tag "Find", class:"btn btn-outline-primary", style:"width:100px"
+
 
 %br
-
-= button_to 'Add New Listing', new_listing_path, :method => :get
-
-%br
-
-= form_tag listings_path, :method => :get, id: "zipcode filter" do
-  = label :condition, :zipcode, 'Zip Code'
-  = text_field :condition, 'zipcode'
-  = submit_tag 'Filter'
 
 %table#listings.table.table-striped.col-md-12{id:'listing_table'}
   %thead
     %tr
-      %th #
+      %th Sorted by:
       - Listing::index_display_cols.each do |col|
         - if col == flash[:sorted_col]
           %th.hilite= Listing::sym2name[col]
         - elsif Listing::valid_sort_cols.include?col
           %th= link_to Listing::sym2name[col], listings_path(:sorted_col => col)
-        - else
-          %th= Listing::sym2name[col]
-      %th Ratings
-      %th{:colspan => 1} Options
+        - elsif col == :rating
+          %th= link_to Listing::sym2name[col], listings_path(:sorted_col => col)
 
-  %tbody
-    - counter = 0
-    - @all_listings.each do |listing|
-      %tr
-        %td= counter+1
-        - Listing::index_display_cols.each do |col|
-          %td= listing[col]
-        %td= @avg_ratings[counter]
-        %td= link_to "More Details", listing
+
+.container
+  - counter = 0
+  - until counter >= @all_listings.size
+    .row.text-center
+      - for _ in 1..4
+        - listing = @all_listings[counter]
+        - rating = listing[:rating.to_s].nil? ? 0 : listing[:rating.to_s]*10
+        - address = listing[:address.to_s] + ', ' + listing[:city.to_s] + ', ' + listing[:state.to_s] + ', ' + listing[:zipcode.to_s]
+        .col-lg-3.col-md-6.mb-4
+          .card.h-100
+            %img.card-img-top{:alt => "", :src => "http://placehold.it/500x325"}/
+            .card-body
+              %h4.card-title
+                = "##{counter+1} - " + listing['name']
+              %p.card-text
+                = "Price: #{listing[:daily_price.to_s]} | Size: #{listing[:size.to_s]}\u33A5"
+                %br
+                = "Address: #{address}"
+              .progress
+                .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => rating, :role => "progressbar", :style => "width: #{rating}%"}
+                  - if listing[:rating.to_s].nil?
+                    = "No customer rating"
+                  - else
+                    = "#{listing[:rating.to_s]}"
+            .card-footer
+              = button_to "More Details", listing_path(listing['id']), {method: :get, class: "btn btn-primary btn-lg"}
         - counter += 1
+        - break if counter >= @all_listings.size
 
-%h5 Map Mode for Listings
+%h2
+  = "Map Mode for Listings"
 -#(To be improved)
 %div{:id=>"MapDisplay", :style=>"position:relative;width:100%;min-width:290px;height:500px;"}
+

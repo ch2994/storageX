@@ -3,21 +3,25 @@ require 'securerandom'
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy, :show_review]
 
+
   def index
     conditions = index_condition_extract
     sorted_col = get_sorted_col
     search_query = params['queryTbx']
     gon.azure_map_key = Listing.azure_map_key
     @all_listings = Listing.user_filter(conditions, sorted_col, search_query)
+    # Eliminate the listings owned by current customer
     if not cur_customer_id.nil?
       @all_listings = @all_listings.where("customer_id != #{cur_customer_id}")
     end
     # support map mode display by passing all listings' coordinates to front-end
-    gon.listings_coordinates, @avg_ratings = [], []
-    @all_listings.each do |one_listing|
-      gon.listings_coordinates.append([one_listing.lon,one_listing.lat])
-      rating = Review.where(:listing_id => one_listing['id']).average("rating")
-      @avg_ratings.append(rating)
+    @all_listings.to_a.map!(&:serializable_hash)
+    gon.listings_coordinates = @all_listings.map{|one_lisitng| [one_lisitng["lon"],one_lisitng["lat"]]}
+    @all_listings.collect do |one_listing|
+      one_listing['rating'] = Review.where(:listing_id => one_listing['id']).average("rating")
+    end
+    if sorted_col == 'rating'
+      @all_listings.sort!{|a,b| a['rating'] && b['rating'] ? a['rating'] <=> b['rating'] : a['rating'] ? -1 : 1}
     end
     store_situations_for_index(search_query, sorted_col, conditions)
   end
@@ -114,6 +118,23 @@ class ListingsController < ApplicationController
   end
 
   private
+
+    def get_ratings(listings)
+      avg_ratings = []
+      listings.each do |one_listing|
+        rating = Review.where(:listing_id => one_listing['id']).average("rating")
+        avg_ratings.append(rating)
+      end
+      return avg_ratings
+    end
+
+    def get_lon_lat(listings)
+      locs = []
+      listings.each do |one_listing|
+        locs.append([one_listing.lon,one_listing.lat])
+      end
+      return locs
+    end
 
     def set_listing
       @listing = Listing.find(params[:id])
