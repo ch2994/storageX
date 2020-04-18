@@ -15,7 +15,7 @@ class ListingsController < ApplicationController
       @all_listings = @all_listings.where("customer_id != #{cur_customer_id}")
     end
     # support map mode display by passing all listings' coordinates to front-end
-    @all_listings.to_a.map!(&:serializable_hash)
+    @all_listings = @all_listings.to_a.map!(&:serializable_hash)
     gon.listings_coordinates = @all_listings.map{|one_lisitng| [one_lisitng["lon"],one_lisitng["lat"]]}
     @all_listings.collect do |one_listing|
       one_listing['rating'] = Review.where(:listing_id => one_listing['id']).average("rating")
