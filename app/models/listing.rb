@@ -15,7 +15,7 @@ class Listing < ActiveRecord::Base
 
   @valid_sort_cols = [:zipcode, :daily_price, :size]
 
-  @index_display_cols = [:name,:zipcode,:daily_price,:size]
+  @index_display_cols = [:name,:zipcode,:daily_price,:size, :rating]
 
   @sym2name = {:name => 'Name',
                :zipcode => 'Zip Code',
@@ -23,8 +23,10 @@ class Listing < ActiveRecord::Base
                :address => 'Address',
                :city => 'City',
                :state => 'State',
-               :size => 'Size (Cubic Meter)',
-               :images => 'Upload images'}
+               :size => 'Storage Size',
+               :images => 'Upload images',
+               :rating => 'Rating'
+  }
 
 
   class << self
