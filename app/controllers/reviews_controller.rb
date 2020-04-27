@@ -24,13 +24,13 @@ class ReviewsController < ApplicationController
   # POST /reviews.json
   def create
     @review = Review.new(review_params)
-
     respond_to do |format|
-      if @review.save
+      if Review.validate(@review) and @review.save
         format.html { redirect_to bookings_path, notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else
-        format.html { render :new }
+        flash[:notice] = "You are submitting your review multiple times. Aborting"
+        format.html { redirect_to bookings_path }
         format.json { render json: @review.errors, status: :unprocessable_entity }
       end
     end
@@ -68,10 +68,12 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
+
       params_new = params.require(:review).permit(:rating, :comments)
       params_new[:customer_id] = session[:customer_id]
       @bookings = Booking.find(params[:id])
       params_new[:listing_id] = @bookings.listing_id
+      params_new[:anonymous] = params[:anonymous]
       params_new
     end
 end

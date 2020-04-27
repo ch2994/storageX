@@ -9,6 +9,10 @@
   = text_area :review, :comments,
   :rows => 10, :cols =>50, :placeholder => 'Enter text.'
   .span
+  = label :review, 'Anonymous Comment?'
+  .span
+  = check_box_tag :anonymous, true
+  .span
   = submit_tag 'Submit Review', :class => 'btn btn-primary'
 
 = link_to 'Back', bookings_path
