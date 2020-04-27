@@ -55,7 +55,11 @@
         - address = listing[:address.to_s] + ', ' + listing[:city.to_s] + ', ' + listing[:state.to_s] + ', ' + listing[:zipcode.to_s]
         .col-lg-3.col-md-6.mb-4
           .card.h-100
-            %img.card-img-top{:alt => "", :src => "http://placehold.it/500x325"}/
+            - if listing[:images.to_s][0]
+              %img.card-img-top{:alt => "", :src => listing[:images.to_s][0].url}/
+            - else
+              %img.card-img-top{:alt => "", :src => "http://placehold.it/500x325"}/
+
             .card-body
               %h4.card-title
                 = "##{counter+1} - " + listing['name']
