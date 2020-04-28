@@ -55,6 +55,18 @@ class ListingsController < ApplicationController
       redirect_to listings_path
     else
       @all_reviews = Review.where(:listing_id => params[:id])
+      @result = []
+      debugger
+      for review in @all_reviews
+        temp = ""
+        if review[:anonymous] == true
+          temp = 'Anonymous Comment'
+        else
+          temp = Customer.find_by(:id =>review[:customer_id])[:username]
+        end
+        @result.append({:name=>temp,:rating=>review[:rating],:comments=>review[:comments]})
+      end
+      debugger
     end
     # will render app/views/movies/show.<extension> by default
   end

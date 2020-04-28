@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20200403012654) do
     t.text     "comments"
     t.integer  "customer_id",                         null: false
     t.integer  "listing_id",                          null: false
+    t.boolean  "anonymous"
   end
 
   add_foreign_key "bookings", "customers"
