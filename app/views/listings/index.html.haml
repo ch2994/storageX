@@ -53,6 +53,7 @@
         - listing = @all_listings[counter]
         - rating = listing[:rating.to_s].nil? ? 0 : listing[:rating.to_s]*10
         - address = listing[:address.to_s] + ', ' + listing[:city.to_s] + ', ' + listing[:state.to_s] + ', ' + listing[:zipcode.to_s]
+
         .col-lg-3.col-md-6.mb-4
           .card.h-100
             - if listing[:images.to_s][0]
