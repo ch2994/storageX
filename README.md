@@ -17,3 +17,5 @@
 3. Make a booking
 4. Edit Listing/Booking
 5. Search listing
+
+### How to test:
