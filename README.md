@@ -11,3 +11,9 @@
 4.  Code (github URI) for public
 5.  Any additional materials you would like to submit
 
+### Features:
+1. Sign up/Log in
+2. Create a listing
+3. Make a booking
+4. Edit Listing/Booking
+5. Search listing
