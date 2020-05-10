@@ -26,7 +26,28 @@ When you are in log-in state, you will be allowed to post your own listing. The 
 4. Please click on the button - "Location Check" to make sure your address is valid and what you want in a geographic map.
 5. Finally press the "Save" button and finish your posting.
 ### 3. Make a booking
+This is a main feature for customers. Before customer login into their StorageX account, they can only view the pictures, locations and review for a certain listing, but they cannot make a booking until they are logged in. 
+
+The booking steps are as follows:
+1. Click the "More Details" button for the listing you would prefer.
+2. View the price/size/location/review for the exact listing.
+3. Click "Book" if you want to move on.
+4. Choose a date which is suitable for you. If the date is not available, you will be noticed.
+5. The booking is complete. You could edit/write a review if you like.
+
 ### 4. Edit listing/booking
+For listing editing:
+1. Go to "My Listings" tab.
+2. Pick the listing you want to edit and click "edit".
+3. Edit your information, e.g. basic information/upload pictures.
+4. Click "Save".
+
+For booking editing:
+1. Go to "My Bookings" tab.
+2. Pick the booking you want to edit and click "edit".
+3. Edit your booking information(booking date/time).
+4. Click "Save".
+
 ### 5. Search listing & Map mode
 This is an advanced feature from iteration II. As a storage-seeker, you may not know where your target is or you may just know some basic information, like a very ambiguous street name. For this scenario, we developed a fuzzy search feature that support fuzzy matching between user query and listings. Besides, auto-suggestion is also supported and users could see available listing in a map mode at the same time. makes our product more user-friendly. 
 
