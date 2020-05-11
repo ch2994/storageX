@@ -46,7 +46,7 @@ Then(/^I need to see the listings indexed by "([^"]*)"$/) do |col|
 end
 
 When("I press {string} link") do |string|
-  click_link('sign up')
+  visit '/signup'
 end
 
 Then("I should see {string}") do |string|
@@ -60,7 +60,7 @@ end
 
 When(/^I am on the "([^"]*)" page$/) do |arg|
   if arg == 'sign up'
-    click_link('sign up')
+    visit '/signup'
   elsif arg == 'log in'
     visit '/login'
   end
@@ -120,7 +120,7 @@ end
 
 When(/^I click the "([^"]*)" link$/) do |arg|
   if arg == 'Add New Listing'
-    click_button('Add New Listing')
+    click_button('Post my storage')
   end
 end
 
