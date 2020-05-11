@@ -15,6 +15,8 @@ https://safe-headland-54193.herokuapp.com (Supported by Heroku)
 
 ## Features:
 ### 1. Sign up/Log in
+Customers are allowed to search for listings without log in. To create a listing or make a resevation, however, customers will be asked to log in or create an account. Sign up and log in buttons are located on the top right side of the main page. 
+
 ### 2. Create a listing
 This is one of main features for listing owners. Customers could use the feature to upload their spare storage with all necessary information. Moreover, for the sake of attracting storage-seekers, fancy images could be uploaded and managed whenever you like. 
 
