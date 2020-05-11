@@ -57,4 +57,6 @@ This is an advanced feature from iteration II. As a storage-seeker, you may not 
 
 ## How to test:
 1. BDD \
-The project uses cucumber for BDD tests and there are 16 scenarios.
+The project uses cucumber for BDD tests and there are 14 scenarios. To run the tests, run the following command:
+```bash
+bundle exec cucumber
