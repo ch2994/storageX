@@ -56,3 +56,5 @@ This is an advanced feature from iteration II. As a storage-seeker, you may not 
 \* Microsoft Azure Map supports address-matching RESTful APIs and map component.
 
 ## How to test:
+1. BDD \
+The project uses cucumber for BDD tests and there are 16 scenarios.
