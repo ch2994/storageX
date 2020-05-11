@@ -100,7 +100,7 @@ end
 
 Given(/^The StorageX has the following customers$/) do |table|
   # table is a table.hashes.keys # => [:username, :password_digest, :first_name, :last_name, :email, :phone, :created_at, :updated_at]
-  table.hashes do |customer|
+  table.hashes.each do |customer|
     Customer.create(customer)
   end
 end
