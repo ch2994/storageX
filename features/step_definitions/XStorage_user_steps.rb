@@ -121,6 +121,8 @@ end
 When(/^I click the "([^"]*)" link$/) do |arg|
   if arg == 'Add New Listing'
     click_button('Post my storage')
+  elsif arg == 'More Details'
+    visit '/listings/1'
   end
 end
 
